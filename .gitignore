@@ -1,0 +1,11 @@
+.DS_Store
+node_modules
+dist
+release
+.plugins
+/**/lib
+.vscode
+lerna-debug.log
+yarn-error.log
+temp
+.idea

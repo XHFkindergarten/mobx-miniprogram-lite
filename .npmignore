@@ -1,0 +1,8 @@
+node_modules
+src
+scripts
+.gitignore
+.prettierrc
+tsconfig.json
+yarn-error.log
+yarn.lock
