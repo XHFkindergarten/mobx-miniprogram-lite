@@ -8,6 +8,9 @@ devDependencies:
   '@types/wechat-miniprogram':
     specifier: ^3.4.1
     version: mirrors.tencent.com/@types/wechat-miniprogram@3.4.1
+  cross-env:
+    specifier: ^7.0.3
+    version: mirrors.tencent.com/cross-env@7.0.3
   esbuild:
     specifier: ^0.19.2
     version: mirrors.tencent.com/esbuild@0.19.2
@@ -783,6 +786,27 @@ packages:
     version: 1.0.3
     dev: true
 
+  mirrors.tencent.com/cross-env@7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/cross-env/-/cross-env-7.0.3.tgz}
+    name: cross-env
+    version: 7.0.3
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: mirrors.tencent.com/cross-spawn@7.0.3
+    dev: true
+
+  mirrors.tencent.com/cross-spawn@7.0.3:
+    resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/cross-spawn/-/cross-spawn-7.0.3.tgz}
+    name: cross-spawn
+    version: 7.0.3
+    engines: {node: '>= 8'}
+    dependencies:
+      path-key: mirrors.tencent.com/path-key@3.1.1
+      shebang-command: mirrors.tencent.com/shebang-command@2.0.0
+      which: mirrors.tencent.com/which@2.0.2
+    dev: true
+
   mirrors.tencent.com/dargs@7.0.0:
     resolution: {integrity: sha512-2iy1EkLdlBzQGvbweYRFxmFath8+K7+AKB0TlhHWkNuH+TmovaMH/Wp7V7R4u7f4SnX3OgLsU9t1NI9ioDnUpg==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/dargs/-/dargs-7.0.0.tgz}
     name: dargs
@@ -1261,6 +1285,12 @@ packages:
     version: 1.0.0
     dev: true
 
+  mirrors.tencent.com/isexe@2.0.0:
+    resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/isexe/-/isexe-2.0.0.tgz}
+    name: isexe
+    version: 2.0.0
+    dev: true
+
   mirrors.tencent.com/js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/js-tokens/-/js-tokens-4.0.0.tgz}
     name: js-tokens
@@ -1627,6 +1657,13 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  mirrors.tencent.com/path-key@3.1.1:
+    resolution: {integrity: sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/path-key/-/path-key-3.1.1.tgz}
+    name: path-key
+    version: 3.1.1
+    engines: {node: '>=8'}
+    dev: true
+
   mirrors.tencent.com/path-parse@1.0.7:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/path-parse/-/path-parse-1.0.7.tgz}
     name: path-parse
@@ -1873,6 +1910,22 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: mirrors.tencent.com/lru-cache@6.0.0
+    dev: true
+
+  mirrors.tencent.com/shebang-command@2.0.0:
+    resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/shebang-command/-/shebang-command-2.0.0.tgz}
+    name: shebang-command
+    version: 2.0.0
+    engines: {node: '>=8'}
+    dependencies:
+      shebang-regex: mirrors.tencent.com/shebang-regex@3.0.0
+    dev: true
+
+  mirrors.tencent.com/shebang-regex@3.0.0:
+    resolution: {integrity: sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/shebang-regex/-/shebang-regex-3.0.0.tgz}
+    name: shebang-regex
+    version: 3.0.0
+    engines: {node: '>=8'}
     dev: true
 
   mirrors.tencent.com/slash@3.0.0:
@@ -2150,6 +2203,16 @@ packages:
     dependencies:
       spdx-correct: mirrors.tencent.com/spdx-correct@3.2.0
       spdx-expression-parse: mirrors.tencent.com/spdx-expression-parse@3.0.1
+    dev: true
+
+  mirrors.tencent.com/which@2.0.2:
+    resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/which/-/which-2.0.2.tgz}
+    name: which
+    version: 2.0.2
+    engines: {node: '>= 8'}
+    hasBin: true
+    dependencies:
+      isexe: mirrors.tencent.com/isexe@2.0.0
     dev: true
 
   mirrors.tencent.com/wordwrap@1.0.0:

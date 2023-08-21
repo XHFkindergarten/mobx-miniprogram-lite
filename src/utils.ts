@@ -9,9 +9,11 @@ export const getType = (item: object) => {
 }
 
 export function isFunction(item: object): item is Function {
+  if (!item) return false
   return getType(item) === FUN_TYPE
 }
 
 export function isObject(item: unknown): item is Record<string, any> {
+  if (!item) return false
   return typeof item === 'object'
 }

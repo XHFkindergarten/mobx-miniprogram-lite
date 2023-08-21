@@ -6,7 +6,8 @@
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc && tsc-alias && cross-env NODE_ENV=production node ./scripts/build.js",
+    "tsc": "tsc && tsc-alias",
+    "build": "tsc && cross-env NODE_ENV=production node ./scripts/build.js",
     "dev": "tsc -w & tsc-alias -w & cross-env NODE_ENV=development node ./scripts/build.js -w",
     "cz": "git-cz",
     "release": "standard-version -t mobx-miniprogram-lite --release-as patch",
