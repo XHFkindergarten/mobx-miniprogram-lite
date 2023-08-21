@@ -30,6 +30,7 @@ const shouldWatch =
     splitting: true,
     format: 'esm',
     tsconfig: join(basePath, 'tsconfig.json'),
+    minify: !shouldWatch
   })
 
   /** @type {import('esbuild').BuildContext} */
@@ -45,6 +46,7 @@ const shouldWatch =
     external: peerDependencyNames,
     format: 'cjs',
     tsconfig: join(basePath, 'tsconfig.json'),
+    minify: !shouldWatch
   })
 
   if (shouldWatch) {

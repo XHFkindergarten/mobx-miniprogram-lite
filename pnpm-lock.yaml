@@ -7,10 +7,16 @@ settings:
 devDependencies:
   '@types/wechat-miniprogram':
     specifier: ^3.4.1
-    version: 3.4.1
+    version: mirrors.tencent.com/@types/wechat-miniprogram@3.4.1
   esbuild:
     specifier: ^0.19.2
     version: mirrors.tencent.com/esbuild@0.19.2
+  git-cz:
+    specifier: ^4.9.0
+    version: mirrors.tencent.com/git-cz@4.9.0
+  mobx:
+    specifier: ^6.10.0
+    version: mirrors.tencent.com/mobx@6.10.0
   prettier:
     specifier: ^3.0.2
     version: mirrors.tencent.com/prettier@3.0.2
@@ -22,10 +28,6 @@ devDependencies:
     version: mirrors.tencent.com/typescript@5.1.6
 
 packages:
-
-  /@types/wechat-miniprogram@3.4.1:
-    resolution: {integrity: sha512-szbuYR32VotxNQNQ4YyQ6Ob3ya0tLY0zpf/xvi6DF8Oqb+0Y+5CL5BpxS+4wBSJvlu3VfSXhjxZ0ze1a3l16Pw==}
-    dev: true
 
   mirrors.tencent.com/@esbuild/android-arm64@0.19.2:
     resolution: {integrity: sha512-lsB65vAbe90I/Qe10OjkmrdxSX4UJDjosDgb8sZUKcg3oefEuW2OT2Vozz8ef7wrJbMcmhvCC+hciF8jY/uAkw==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/@esbuild/android-arm64/-/android-arm64-0.19.2.tgz}
@@ -296,6 +298,12 @@ packages:
       fastq: mirrors.tencent.com/fastq@1.15.0
     dev: true
 
+  mirrors.tencent.com/@types/wechat-miniprogram@3.4.1:
+    resolution: {integrity: sha512-szbuYR32VotxNQNQ4YyQ6Ob3ya0tLY0zpf/xvi6DF8Oqb+0Y+5CL5BpxS+4wBSJvlu3VfSXhjxZ0ze1a3l16Pw==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/@types/wechat-miniprogram/-/wechat-miniprogram-3.4.1.tgz}
+    name: '@types/wechat-miniprogram'
+    version: 3.4.1
+    dev: true
+
   mirrors.tencent.com/anymatch@3.1.3:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/anymatch/-/anymatch-3.1.3.tgz}
     name: anymatch
@@ -434,6 +442,13 @@ packages:
     dev: true
     optional: true
 
+  mirrors.tencent.com/git-cz@4.9.0:
+    resolution: {integrity: sha512-cSRL8IIOXU7UFLdbziCYqg8f8InwLwqHezkiRHNSph7oZqGv0togId1kMTfKil6gzK0VaSXeVBb4oDl0fQCHiw==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/git-cz/-/git-cz-4.9.0.tgz}
+    name: git-cz
+    version: 4.9.0
+    hasBin: true
+    dev: true
+
   mirrors.tencent.com/glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/glob-parent/-/glob-parent-5.1.2.tgz}
     name: glob-parent
@@ -511,6 +526,12 @@ packages:
     dependencies:
       braces: mirrors.tencent.com/braces@3.0.2
       picomatch: mirrors.tencent.com/picomatch@2.3.1
+    dev: true
+
+  mirrors.tencent.com/mobx@6.10.0:
+    resolution: {integrity: sha512-WMbVpCMFtolbB8swQ5E2YRrU+Yu8iLozCVx3CdGjbBKlP7dFiCSuiG06uea3JCFN5DnvtAX7+G5Bp82e2xu0ww==, registry: http://r.tnpm.oa.com/, tarball: https://mirrors.tencent.com/npm/mobx/-/mobx-6.10.0.tgz}
+    name: mobx
+    version: 6.10.0
     dev: true
 
   mirrors.tencent.com/mylas@2.1.13:

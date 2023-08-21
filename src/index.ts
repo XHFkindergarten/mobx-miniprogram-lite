@@ -1,1 +1,1 @@
-export const name = 'ok'
+export { connectComponent } from './connect-component'
