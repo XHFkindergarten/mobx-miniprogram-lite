@@ -1,21 +1,27 @@
 {
   "name": "mobx-miniprogram-lite",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "description": "lightweight mobx-binding for wechat-miniprogram",
   "main": "lib/index.common.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "tsc && tsc-alias && node ./scripts/build.js",
-    "dev": "tsc -w & tsc-alias -w & node ./scripts/build.js -w",
+    "build": "tsc && tsc-alias && cross-env NODE_ENV=production node ./scripts/build.js",
+    "dev": "tsc -w & tsc-alias -w & cross-env NODE_ENV=development node ./scripts/build.js -w",
     "cz": "git-cz",
+    "release": "standard-version -t mobx-miniprogram-lite --release-as patch",
     "release:alpha": "standard-version -t mobx-miniprogram-lite --release-as patch --prerelease alpha"
   },
-  "keywords": [],
+  "keywords": [
+    "mobx",
+    "miniprogram",
+    "wechat"
+  ],
   "author": "XHFkindergarten@gmail.com",
   "license": "ISC",
   "devDependencies": {
     "@types/wechat-miniprogram": "^3.4.1",
+    "cross-env": "^7.0.3",
     "esbuild": "^0.19.2",
     "mobx": "^6.10.0",
     "prettier": "^3.0.2",
