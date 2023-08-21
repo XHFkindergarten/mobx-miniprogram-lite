@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.1-alpha.2](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.1-alpha.1...mobx-miniprogram-lite0.0.1-alpha.2) (2023-08-21)
+
 ### 0.0.1-alpha.1 (2023-08-21)
 
 
