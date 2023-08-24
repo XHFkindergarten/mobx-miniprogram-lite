@@ -1,5 +1,6 @@
 import { getType, isFunction, isObject } from '@/utils'
-import { DATE_TYPE, FUN_TYPE, OBJ_TYPE, REG_TYPE } from '@/const'
+import { DATE_TYPE, FUN_TYPE, REG_TYPE } from '@/const'
+import { isObservable, isObservableArray, makeAutoObservable } from 'mobx'
 
 export function traverseModel<T>(model: T): T {
   // 0, '', undefined, null
@@ -18,11 +19,21 @@ export function traverseModel<T>(model: T): T {
   if ([REG_TYPE, FUN_TYPE, DATE_TYPE].includes(type)) return model
 
   // array
-  if (Array.isArray(model)) {
-    return model.map((item) => traverseModel(item)) as T
+  // observable array is actually an object(in mobx's none-proxy mode)
+  if (Array.isArray(model) || isObservableArray(model)) {
+    const arr = [] as typeof model
+    for (let i = 0; i < model.length; i++) {
+      arr.push(traverseModel(model[i]))
+    }
+    return arr
   }
 
   if (!isObject(model)) return model
+
+  // make nested class instance observable
+  if (!isObservable(model)) {
+    makeAutoObservable(model)
+  }
 
   const result: Record<any, any> = {}
 
