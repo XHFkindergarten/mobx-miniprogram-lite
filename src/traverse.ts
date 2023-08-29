@@ -1,6 +1,6 @@
 import { getType, isFunction, isObject } from '@/utils'
 import { DATE_TYPE, FUN_TYPE, REG_TYPE } from '@/const'
-import { isObservable, isObservableArray, makeAutoObservable } from 'mobx'
+import { isObservableArray } from 'mobx'
 
 export function traverseModel<T>(model: T): T {
   // 0, '', undefined, null
@@ -29,12 +29,6 @@ export function traverseModel<T>(model: T): T {
   }
 
   if (!isObject(model)) return model
-
-  // make nested class instance observable
-  if (!isObservable(model)) {
-    makeAutoObservable(model)
-  }
-
   const result: Record<any, any> = {}
 
   // object own properties
@@ -45,20 +39,33 @@ export function traverseModel<T>(model: T): T {
     (_) => !isFunction((model as Record<string, any>)[_])
   )
 
-  // 访问器
-  const descriptorProperties = Object.keys(
-    Object.getOwnPropertyDescriptors(model)
-  ).filter((_) => {
-    return !ownProperties.includes(_)
+  stateProperties.forEach((key) => {
+    result[key] = traverseModel((model as Record<string, any>)[key])
   })
 
-  stateProperties.forEach((prop) => {
-    result[prop] = traverseModel((model as Record<string, any>)[prop])
+  const ownDescriptors = Object.getOwnPropertyDescriptors(model)
+
+  const ownGetterKeys = Object.keys(ownDescriptors).filter(
+    (key) => ownDescriptors[key].get
+  )
+
+  ownGetterKeys.forEach((key) => {
+    result[key] = traverseModel((model as Record<string, any>)[key])
   })
 
-  descriptorProperties.forEach((prop) => {
-    result[prop] = traverseModel((model as Record<string, any>)[prop])
-  })
+  const proto = Object.getPrototypeOf(model)
+
+  if (proto !== null) {
+    const protoDescriptors = Object.getOwnPropertyDescriptors(proto)
+
+    const protoGetterKeys = Object.keys(protoDescriptors).filter(
+      (key) => !ownGetterKeys.includes(key) && protoDescriptors[key].get
+    )
+
+    protoGetterKeys.forEach((key) => {
+      result[key] = traverseModel((model as Record<string, any>)[key])
+    })
+  }
 
   return result
 }

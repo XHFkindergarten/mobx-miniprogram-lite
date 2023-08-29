@@ -5,10 +5,6 @@ import { shimStoreMap } from './shim-store-map'
 const CONSTRUCTOR = 'constructor'
 
 export const enableObservable = (model: Record<string, any>) => {
-  if (shimStoreMap.getReactiveState(model)) {
-    return
-  }
-
   const ownKeys = Object.getOwnPropertyNames(model)
 
   for (const key of ownKeys) {
@@ -32,7 +28,6 @@ export const enableObservable = (model: Record<string, any>) => {
   if (!isObservable(model)) {
     makeAutoObservable(model)
   }
-  shimStoreMap.setReactiveState(model, true)
 }
 
 export { runInAction } from 'mobx'

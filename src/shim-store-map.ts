@@ -18,8 +18,6 @@ class ShimStoreMap {
 
   storeListeners: StoreListener[][] = []
 
-  reactiveStates: boolean[] = []
-
   reactions: ReactionItem[] = []
 
   getStoreIndex(store: Store, create = false): number {
@@ -28,7 +26,6 @@ class ShimStoreMap {
       if (create) {
         this.stores.push(store)
         this.storeListeners.push([])
-        this.reactiveStates.push(false)
         this.reactions.push({
           state: null,
           expose: null
@@ -49,16 +46,6 @@ class ShimStoreMap {
   getListeners(store: Store): StoreListener[] | undefined {
     const index = this.getStoreIndex(store)
     return this.storeListeners[index]
-  }
-
-  setReactiveState(store: Store, state: boolean) {
-    const index = this.getStoreIndex(store, true)
-    this.reactiveStates[index] = state
-  }
-
-  getReactiveState(store: Store): boolean {
-    const index = this.getStoreIndex(store)
-    return this.reactiveStates[index] || false
   }
 
   createReaction(store: Store, prefix: string) {
@@ -87,10 +74,7 @@ class ShimStoreMap {
         }
       )
     }
-    if (!reactionItem.state) {
-      reactionItem.state = formatedStore
-    }
-
+    if (formatedStore) reactionItem.state = formatedStore
     return reactionItem
   }
 
