@@ -31,6 +31,7 @@ const shouldWatch =
       },
       external: peerDependencyNames,
       splitting: false,
+      treeShaking: true,
       format: 'esm',
       tsconfig: join(basePath, 'tsconfig.json'),
       minify: !shouldWatch
@@ -46,6 +47,7 @@ const shouldWatch =
       platform: 'node',
       target: 'es2015',
       sourcemap: shouldWatch ? 'inline' : true,
+      treeShaking: true,
       define: {
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
       },

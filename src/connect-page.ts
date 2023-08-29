@@ -2,7 +2,9 @@ import { StoreListener, shimStoreMap } from './shim-store-map'
 
 export const connectPage = <
   TData extends { store: Record<any, any> } & WechatMiniprogram.Page.DataOption,
-  TCustom extends WechatMiniprogram.Page.CustomOption
+  TCustom extends WechatMiniprogram.Page.CustomOption & {
+    store: Record<string, any>
+  }
 >(
   options: WechatMiniprogram.Page.Options<TData, TCustom>
 ) => {
@@ -38,6 +40,7 @@ export const connectPage = <
 
   // @override onLoad
   function onLoad(this: Instance, ...args: any[]) {
+    this.store = store
     replaceOnLoad.call(this)
     _onLoad?.apply(this, args as [Record<string, string | undefined>])
   }
@@ -52,8 +55,9 @@ export const connectPage = <
     _onUnload?.call(this)
   }
 
-  // if store is passed as a property of options
-  // miniprogram will modify store and make behavior unpredictable
+  // miniprogram runtime will deep-clone option-properties, and make mobx's behavior unpredictable
+  // mount store in onLoad
+  // @ts-ignore
   delete options.store
 
   return Page({

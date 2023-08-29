@@ -1,6 +1,3 @@
-import { IReactionDisposer, reaction, configure } from 'mobx'
-import { traverseModel } from '@/traverse'
-import { enableObservable } from './mobx-utils'
 import { StoreListener, shimStoreMap } from './shim-store-map'
 
 export const connectComponent = <
@@ -15,7 +12,7 @@ export const connectComponent = <
     TData,
     TProperty,
     TMethod,
-    TCustomInstanceProperty,
+    TCustomInstanceProperty & { store: TStore },
     TIsPage
   > & { store: TStore }
 ) => {
@@ -23,12 +20,13 @@ export const connectComponent = <
     TData,
     TProperty,
     TMethod,
-    TCustomInstanceProperty,
+    TCustomInstanceProperty & { store: TStore },
     TIsPage
   >
 
   const _attached = options.lifetimes?.attached
   const _detached = options.lifetimes?.detached
+  const _created = options.lifetimes?.created
 
   const store = options.store
 
@@ -71,15 +69,22 @@ export const connectComponent = <
     _detached?.call(this)
   }
 
+  // override created
+  function created(this: Instance) {
+    this.store = store
+    _created?.call(this)
+  }
+
   options.lifetimes = {
     ...options.lifetimes,
     attached,
-    detached
+    detached,
+    created
   }
 
   // @ts-ignore
-  // if store is passed as a property of options
-  // miniprogram will modify store and make behavior unpredictable
+  // miniprogram runtime will deep-clone option-properties, and make mobx's behavior unpredictable
+  // mount store in lifetimes.created
   delete options.store
 
   return Component({

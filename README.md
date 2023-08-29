@@ -22,16 +22,36 @@ npm install mobx-miniprogram-lite
 
 ### connect
 
-- class definition
+- store definition
 
 ```typescript
+// use class definition
+import { makeAutoObservable } from 'mobx-miniprogram-lite'
+
 class Count {
+  constructor() {
+    // important, make this object observable, then app view can be responsive.
+    makeAutoObservable(this)
+  }
+
   value = 0
 
   addValue = () => {
     this.value += 1
   }
 }
+
+export const countStore = new Count()
+
+// or use object definition
+import { observable } from 'mobx-miniprogram-lite'
+
+export const countStore = observable({
+  value: 0,
+  addValue() {
+    this.value += 1
+  }
+})
 ```
 
 - Use connectPage and connectComponent to replace the Page and Component instance methods, inject the data entity into the `data.store` attribute, and the library will automatically complete the binding between the two.
@@ -40,14 +60,11 @@ Page Instance
 
 ```typescript
 import { connectPage } from 'mobx-miniprogram-lite'
-
-const count = new Count()
+import { countStore } from './count'
 
 connectPage({
-  data: {
-    store: {
-      count
-    }
+  store: {
+    count: countStore
   }
 })
 ```
@@ -56,14 +73,11 @@ Component Instance
 
 ```typescript
 import { connectComponent } from 'mobx-miniprogram-lite'
-
-const count = new Count()
+import { countStore } from './count'
 
 connectComponent({
-  data: {
-    store: {
-      count
-    }
+  store: {
+    count: countStore
   }
 })
 ```
@@ -74,25 +88,22 @@ connectComponent({
 
 ```typescript
 import { connectPage } from 'mobx-miniprogram-lite'
-
-const count = new Count()
+import { countStore } from './count'
 
 connectPage({
-  data: {
-    store: {
-      count
-    }
+  store: {
+    count: countStore
   },
   bindTapAdd() {
-    count.addValue()
+    this.store.count.addValue()
   }
 })
 ```
 
-- Bind interactive functions to page elements
+- Binding data and interaction events in WXML
 
 ```html
-<view> {{store.count.value}} </view>
+<view> {{count.value}} </view>
 <view bindtap="bindTapAdd"> click me to add value </view>
 ```
 

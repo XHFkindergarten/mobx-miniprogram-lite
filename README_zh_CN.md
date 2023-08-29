@@ -25,13 +25,33 @@ npm install mobx-miniprogram-lite
 - 定义数据和方法
 
 ```typescript
+// 使用类定义
+import { makeAutoObservable } from 'mobx-miniprogram-lite'
+
 class Count {
+  constructor() {
+    // 非常重要，让这个类的实例变为被观测的，这样我们才能实现响应式视图
+    makeAutoObservable(this)
+  }
+
   value = 0
 
   addValue = () => {
     this.value += 1
   }
 }
+
+export const countStore = new Count()
+
+// 或直接使用对象定义
+import { observable } from 'mobx-miniprogram-lite'
+
+export const countStore = observable({
+  value: 0,
+  addValue() {
+    this.value += 1
+  }
+})
 ```
 
 - 使用 connectPage 和 connectComponent 替代 Page 和 Component 实例方法，将数据实体注入 data.store 属性中，库会自动完成两者的绑定。
@@ -40,14 +60,11 @@ Page 页面实例
 
 ```typescript
 import { connectPage } from 'mobx-miniprogram-lite'
-
-const count = new Count()
+import { countStore } from './count'
 
 connectPage({
-  data: {
-    store: {
-      count
-    }
+  store: {
+    count: countStore
   }
 })
 ```
@@ -56,14 +73,11 @@ Component 组件实例
 
 ```typescript
 import { connectComponent } from 'mobx-miniprogram-lite'
-
-const count = new Count()
+import { countStore } from './count'
 
 connectComponent({
-  data: {
-    store: {
-      count
-    }
+  store: {
+    count: countStore
   }
 })
 ```
@@ -74,22 +88,19 @@ connectComponent({
 
 ```typescript
 import { connectPage } from 'mobx-miniprogram-lite'
-
-const count = new Count()
+import { countStore } from './count'
 
 connectPage({
-  data: {
-    store: {
-      count
-    }
+  store: {
+    count: countStore
   },
   bindTapAdd() {
-    count.addValue()
+    this.store.count.addValue()
   }
 })
 ```
 
-- 将交互函数和页面元素绑定
+- 在 WXML 中绑定数据和交互事件
 
 ```html
 <view> {{store.count.value}} </view>
