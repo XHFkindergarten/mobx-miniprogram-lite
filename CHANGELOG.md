@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2-alpha.0](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.1...mobx-miniprogram-lite0.0.2-alpha.0) (2023-08-29)
+
+
+### Features
+
+* 🎸 重构 store connect API, 优化书写体验 ([9f2130c](https://github.com/XHFkindergarten/mobx-miniprogram-lite/commit/9f2130c9d17adbbda5d8d4f57de0e9b8be031435))
+* 🎸 make method mobx-action automatically ([913cf9a](https://github.com/XHFkindergarten/mobx-miniprogram-lite/commit/913cf9af15f787f049ba2bac3eb973b8ff336e8b))
+
 ### [0.0.1](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.1-alpha.4...mobx-miniprogram-lite0.0.1) (2023-08-25)
 
 ### [0.0.1-alpha.4](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.1-alpha.3...mobx-miniprogram-lite0.0.1-alpha.4) (2023-08-24)
