@@ -3,7 +3,7 @@
 <p style="text-align:center;">
   <span>简体中文</span> |
   <a href="./README.md">English</a> |
-  <a href="https://developers.weixin.qq.com/s/7U4VcFmN7pKx">Example</a>
+  <a href="https://developers.weixin.qq.com/s/CgLK0Pmq7hKv">Example</a>
 </p>
 
 ## 为什么推荐使用 mobx-miniprogram-lite

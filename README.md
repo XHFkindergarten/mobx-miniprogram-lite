@@ -3,7 +3,7 @@
 <p style="text-align:center;">
   <a href="./README_zh_CN.md">简体中文</a> |
   <span>English</span> |
-  <a href="https://developers.weixin.qq.com/s/7U4VcFmN7pKx">Example</a>
+  <a href="https://developers.weixin.qq.com/s/CgLK0Pmq7hKv">Example</a>
 </p>
 
 ## Why?
