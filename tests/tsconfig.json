@@ -1,5 +1,5 @@
 {
-  "include": ["src/**/*", "types"],
+  "include": ["./**/*"],
   "exclude": [
     "node_modules",
     "dist"
@@ -13,21 +13,21 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "jsx": "react",
     "baseUrl": "./",
-    "rootDir": "./src",
     // import emit helpers from tslib
     "importHelpers": true,
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["../src/*"],
+      "@tests/*": ["./*"]
     },
     /* noEmit - Esbuild builds (emits) files, not tsc. */
-    // "noEmit": true,
-    "emitDeclarationOnly": true,
+    "noEmit": true,
     "declaration": true,
     "declarationDir": "./lib",
     /* Additional Options */
     "strict": true,
     "skipLibCheck": true,
     "types": [
+      "node",
       "jest",
       "wechat-miniprogram"
     ],

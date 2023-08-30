@@ -30,24 +30,24 @@ export const connectComponent = <
 
   const store = options.store
 
-  if (!store || !Object.keys(store)) return options
-
   const listenerMap: Record<string, StoreListener> = {}
 
   // create listeners
   const replaceAttached = function (this: Instance) {
     let formatedData: Record<string, any> = {}
-    Object.entries(store).forEach(([alias, model]: [string, any]) => {
-      const reaction = shimStoreMap.createReaction(model, `${alias}.`)
-      const listener: StoreListener = ((value: any) => {
-        wx.nextTick(() => {
-          this.setData(value as Partial<TData>)
-        })
-      }).bind(this)
-      listenerMap[alias] = listener
-      shimStoreMap.setListener(model, listener)
-      if (reaction.state) formatedData[alias] = reaction.state
-    })
+    Object.entries(store as Record<string, any>).forEach(
+      ([alias, model]: [string, any]) => {
+        const reaction = shimStoreMap.createReaction(model, `${alias}.`)
+        const listener: StoreListener = ((value: any) => {
+          wx.nextTick(() => {
+            this.setData(value as Partial<TData>)
+          })
+        }).bind(this)
+        listenerMap[alias] = listener
+        shimStoreMap.setListener(model, listener)
+        if (reaction.state) formatedData[alias] = reaction.state
+      }
+    )
     this.setData({
       ...formatedData
     } as Partial<TData>)
@@ -71,7 +71,7 @@ export const connectComponent = <
 
   // override created
   function created(this: Instance) {
-    this.store = store
+    this.store = store as TStore
     _created?.call(this)
   }
 

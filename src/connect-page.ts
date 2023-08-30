@@ -15,8 +15,6 @@ export const connectPage = <
 
   const store = options.store
 
-  if (!store || !Object.keys(store)) return options
-
   const listenerMap: Record<string, StoreListener> = {}
 
   // create listeners

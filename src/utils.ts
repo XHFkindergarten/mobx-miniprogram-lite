@@ -1,12 +1,6 @@
 import { FUN_TYPE } from './const'
 
-export const getType = (item: object) => {
-  try {
-    return Object.prototype.toString.call(item)
-  } catch {
-    return ''
-  }
-}
+export const getType = (item: object) => Object.prototype.toString.call(item)
 
 export function isFunction(item: object): item is Function {
   if (!item) return false
@@ -14,6 +8,5 @@ export function isFunction(item: object): item is Function {
 }
 
 export function isObject(item: unknown): item is Record<string, any> {
-  if (!item) return false
-  return typeof item === 'object'
+  return Boolean(item && typeof item === 'object')
 }

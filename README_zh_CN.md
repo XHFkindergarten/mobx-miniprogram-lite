@@ -34,8 +34,15 @@ class Count {
     makeAutoObservable(this)
   }
 
+  // states
   value = 0
 
+  // computed
+  get doubleValue() {
+    return this.value * 2
+  },
+
+  // action
   addValue = () => {
     this.value += 1
   }
@@ -47,7 +54,13 @@ export const countStore = new Count()
 import { observable } from 'mobx-miniprogram-lite'
 
 export const countStore = observable({
+  // states
   value: 0,
+  // computed
+  get doubleValue() {
+    return this.value * 2
+  },
+  // action
   addValue() {
     this.value += 1
   }
@@ -103,7 +116,8 @@ connectPage({
 - 在 WXML 中绑定数据和交互事件
 
 ```html
-<view> {{store.count.value}} </view>
+<view> value: {{count.value}} </view>
+<view> value * 2: {{count.doubleValue}} </view>
 <view bindtap="bindTapAdd"> click me to add value </view>
 ```
 
