@@ -1,7 +1,7 @@
 import { StoreListener, shimStoreMap } from './shim-store-map'
 
 export const connectPage = <
-  TData extends { store: Record<any, any> } & WechatMiniprogram.Page.DataOption,
+  TData extends WechatMiniprogram.Page.DataOption,
   TCustom extends WechatMiniprogram.Page.CustomOption & {
     store: Record<string, any>
   }
