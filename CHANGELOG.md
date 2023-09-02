@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3-alpha.0](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.2...mobx-miniprogram-lite0.0.3-alpha.0) (2023-09-02)
+
+
+### Bug Fixes
+
+* 🐛 修复 connectPage 类型问题 ([4d08c64](https://github.com/XHFkindergarten/mobx-miniprogram-lite/commit/4d08c64aeae045733026f74ed67ce713270b7ab7))
+
 ### [0.0.2](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.2-alpha.0...mobx-miniprogram-lite0.0.2) (2023-08-29)
 
 ### [0.0.2-alpha.0](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.1...mobx-miniprogram-lite0.0.2-alpha.0) (2023-08-29)
