@@ -16,6 +16,10 @@ class Todo {
   title: string
 
   done: boolean
+
+  notes: string[] = []
+
+  innerProps: Record<string, string> = {}
 }
 
 class ArrayStore {
@@ -57,6 +61,51 @@ class ArrayStore {
     runInAction(() => {
       this.todos.push(new Todo(props))
     })
+  }
+
+  doNothing = () => {
+    const first = this.todos[0]
+    this.todos[0] = new Todo({
+      title: first.title,
+      done: first.done
+    })
+  }
+
+  addNote = () => {
+    const last = this.todos[this.length - 1]
+    last.notes.push('hello~')
+  }
+
+  forceUpdateNote = () => {
+    const last = this.todos[this.length - 1]
+    // @ts-ignore
+    last.notes = 'hello~'
+  }
+
+  revertNote = () => {
+    const last = this.todos[this.length - 1]
+    last.notes = ['hello~']
+  }
+
+  removeNote = () => {
+    const last = this.todos[this.length - 1]
+    last.notes = []
+  }
+
+  removeTodo = () => {
+    this.todos = this.todos.slice(0, this.length - 1)
+  }
+
+  updateInnerProps = () => {
+    const last = this.todos[this.length - 1]
+    last.innerProps = {
+      name: 'bye'
+    }
+  }
+
+  revertInnerProps() {
+    const last = this.todos[this.length - 1]
+    last.innerProps = {}
   }
 }
 

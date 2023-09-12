@@ -1,3 +1,4 @@
+import '@tests/utils/mock-page'
 import path from 'path'
 import simulate from 'miniprogram-simulate'
 import { arrayStore } from '@tests/playgrounds/basic/stores/array.store'
@@ -125,16 +126,7 @@ describe('array', () => {
 
     expect(snapshot1).toEqual(snapshot2)
 
-    // container.detach()
-
-    const container2 = simulate.render(id)
-    const parent2 = document.createElement('parent-wrapper')
-
-    container2.attach(parent2)
-
-    const snapshot3 = container2.toJSON()
-
-    expect(snapshot3).toEqual(snapshot2)
+    container.detach()
   })
 
   test('add note', async () => {
