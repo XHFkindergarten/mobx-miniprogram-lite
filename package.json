@@ -1,6 +1,6 @@
 {
   "name": "mobx-miniprogram-lite",
-  "version": "0.0.3-alpha.0",
+  "version": "0.0.3-alpha.1",
   "description": "lightweight mobx-binding for wechat-miniprogram",
   "main": "lib/index.common.js",
   "module": "lib/index.js",

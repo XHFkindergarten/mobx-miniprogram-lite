@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3-alpha.1](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.3-alpha.0...mobx-miniprogram-lite0.0.3-alpha.1) (2023-09-12)
+
+
+### Features
+
+* 🎸 distribute a reaction for each property to improve perf ([8dcd280](https://github.com/XHFkindergarten/mobx-miniprogram-lite/commit/8dcd2801b22387d73ee3be0711735d70c3921d81))
+
 ### [0.0.3-alpha.0](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.2...mobx-miniprogram-lite0.0.3-alpha.0) (2023-09-02)
 
 
