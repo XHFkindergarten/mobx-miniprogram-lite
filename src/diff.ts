@@ -2,7 +2,6 @@ import { FUN_TYPE, OBJ_TYPE, ARR_TYPE } from './const'
 
 export function diffData(current: any, previous: any) {
   const result = {}
-  if (!previous) return current
   syncKeys(current, previous)
   _diff(current, previous, '', result)
   return result

@@ -1,5 +1,5 @@
-import { reaction, type IReactionDisposer } from 'mobx'
-import { traverseModel } from './traverse'
+import { reaction } from 'mobx'
+import { getSerializableKeys, traverseModel } from './traverse'
 import { diffData } from './diff'
 
 type Store = any
@@ -10,7 +10,7 @@ export interface StoreListener {
 
 interface ReactionItem {
   state: any
-  expose: IReactionDisposer | null
+  expose: (() => void) | null
 }
 
 class ShimStoreMap {
@@ -55,24 +55,50 @@ class ShimStoreMap {
 
     const listeners = this.storeListeners[index]
 
-    let formatedStore
+    let formatedStore: Record<string, any> | null = null
     if (!reactionItem.expose) {
-      reactionItem.expose = reaction(
-        () => {
-          formatedStore = traverseModel(store)
-          return formatedStore
-        },
-        (value, oldValue) => {
-          const diff = diffData(value, oldValue)
-          const diffWithPrefix = Object.entries(diff).reduce<
-            Record<string, any>
-          >((prev, [key, value]) => {
-            prev[prefix + key] = value
-            return prev
-          }, {})
-          listeners.forEach((listener) => listener(diffWithPrefix))
+      reactionItem.expose = (() => {
+        const exposeFns: ReactionItem['expose'][] = []
+
+        // values that can be set into component's data
+        const keys = getSerializableKeys(store)
+
+        /**
+         * here we create a listener for each property of the model.
+         * the advantage of this is that when the amount of data in a certain property is too large,
+         * it will not slow down the calculation time of other data.
+         *
+         */
+        keys.forEach((prop) => {
+          const exposeFn = reaction(
+            () => {
+              formatedStore = formatedStore || {}
+              const formated = traverseModel(store[prop])
+              formatedStore[prop] = formated
+              return formated
+            },
+            (newValue, oldValue) => {
+              const diff = diffData(newValue, oldValue)
+              const diffWithPrefix = Object.entries(diff).reduce<
+                Record<string, any>
+              >((prev, [key, value]) => {
+                const sep = key.startsWith('[') ? '' : '.'
+                prev[prefix + prop + sep + key] = value
+                return prev
+              }, {})
+
+              listeners.forEach((listener) =>
+                listener.call(null, diffWithPrefix)
+              )
+            }
+          )
+          exposeFns.push(exposeFn)
+        })
+
+        return () => {
+          exposeFns.forEach((fn) => fn?.call(null))
         }
-      )
+      })()
     }
     if (formatedStore) reactionItem.state = formatedStore
     return reactionItem

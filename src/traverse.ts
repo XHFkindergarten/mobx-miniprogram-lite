@@ -31,41 +31,56 @@ export function traverseModel<T>(model: T): T {
   if (!isObject(model)) return model
   const result: Record<any, any> = {}
 
-  // object own properties
-  const ownProperties = Object.keys(model)
-
-  // exclude actions
-  const stateProperties = ownProperties.filter(
-    (_) => !isFunction((model as Record<string, any>)[_])
-  )
-
-  stateProperties.forEach((key) => {
+  // dfs serializable properties
+  getSerializableKeys(model).forEach((key) => {
     result[key] = traverseModel((model as Record<string, any>)[key])
   })
+
+  return result
+}
+
+// get keys that can be set into a mp component's data
+export function getSerializableKeys(model: Record<string, any>) {
+  // function/action prop
+  const excludeKeys: string[] = []
+
+  // own prop
+  const propKeys: string[] = []
+
+  // computed prop
+  const computedKeys: string[] = []
 
   const ownDescriptors = Object.getOwnPropertyDescriptors(model)
 
-  const ownGetterKeys = Object.keys(ownDescriptors).filter(
-    (key) => ownDescriptors[key].get
-  )
-
-  ownGetterKeys.forEach((key) => {
-    result[key] = traverseModel((model as Record<string, any>)[key])
-  })
+  for (const key in ownDescriptors) {
+    if (typeof model[key] === 'function') {
+      excludeKeys.push(key)
+    } else if (ownDescriptors[key].get) {
+      computedKeys.push(key)
+    } else {
+      propKeys.push(key)
+    }
+  }
 
   const proto = Object.getPrototypeOf(model)
 
-  if (proto !== null) {
+  // in class, getter property is invisible to instance
+  if (proto) {
     const protoDescriptors = Object.getOwnPropertyDescriptors(proto)
-
-    const protoGetterKeys = Object.keys(protoDescriptors).filter(
-      (key) => !ownGetterKeys.includes(key) && protoDescriptors[key].get
-    )
-
-    protoGetterKeys.forEach((key) => {
-      result[key] = traverseModel((model as Record<string, any>)[key])
+    Object.keys(protoDescriptors).forEach((key) => {
+      // class override property: highest priority
+      if (
+        propKeys.includes(key) ||
+        computedKeys.includes(key) ||
+        excludeKeys.includes(key)
+      )
+        return
+      // getter
+      if (protoDescriptors[key].get) {
+        computedKeys.push(key)
+      }
     })
   }
 
-  return result
+  return computedKeys.concat(propKeys)
 }

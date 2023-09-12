@@ -39,6 +39,8 @@ export const connectComponent = <
       ([alias, model]: [string, any]) => {
         const reaction = shimStoreMap.createReaction(model, `${alias}.`)
         const listener: StoreListener = ((value: any) => {
+          // nothing changed
+          if (!Object.keys(value)) return
           wx.nextTick(() => {
             this.setData(value as Partial<TData>)
           })
