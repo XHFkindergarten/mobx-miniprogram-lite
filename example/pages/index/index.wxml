@@ -1,0 +1,12 @@
+<!-- index.wxml -->
+<view class="container">
+  <view class="title">mobx-miniprogram-lite</view>
+  <view class="btns">
+    <view style="margin-top:10px">
+      <button bindtap="gotoGamePage">贪吃蛇游戏</button>
+    </view>
+    <view style="margin-top:10px">
+      <button bindtap="gotoTodoPage">Todo List</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "alwaysStrict": true,
+    "noEmitHelpers": true,
+    "noEmit": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "listEmittedFiles": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "pretty": true,
+    "removeComments": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+    "target": "ES2018",
+    "baseUrl": "." /* Base directory to resolve non-absolute module names. */,
+    "paths": {
+      "/*": [
+        "./*"
+      ]
+    },
+    "lib": [
+      "es5",
+      "es6",
+      "es2017"
+    ],
+    "types": [
+      "wechat-miniprogram",
+    ],
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "node_modules",
+    "miniprogram_dist",
+    "dist",
+    "**/*.spec.ts",
+    "src/typing/*.ts"
+  ]
+}
