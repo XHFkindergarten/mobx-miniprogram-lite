@@ -1,0 +1,7 @@
+<view>
+  <view wx:for="{{arr.todos}}" wx:key="title">
+    <view>{{item.title}}</view>
+    <view wx:if="{{item.done}}">done</view>
+  </view>
+</view>
+<extra></extra>

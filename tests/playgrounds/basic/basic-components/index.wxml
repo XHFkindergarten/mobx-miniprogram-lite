@@ -1,0 +1,3 @@
+<view class="value">{{count.value}}</view>
+<view class="double-value">{{count.doubleValue}}</view>
+<view class="add" bindtap="addValue">add value</view>

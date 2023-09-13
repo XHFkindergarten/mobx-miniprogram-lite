@@ -6,3 +6,5 @@ scripts
 tsconfig.json
 yarn-error.log
 yarn.lock
+.vscode
+CHANGELOG.md

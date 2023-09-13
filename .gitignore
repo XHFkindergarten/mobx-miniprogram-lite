@@ -9,3 +9,4 @@ lerna-debug.log
 yarn-error.log
 temp
 .idea
+example/pnpm-lock.yaml
