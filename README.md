@@ -1,5 +1,7 @@
 # <img style="width:40px;" alt="MOBX" src="https://mobx.js.org/assets/mobx.png"> mobx-miniprogram-lite
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/XHFkindergarten/mobx-miniprogram-lite/blob/master/LICENSE) [![npm version](https://img.shields.io/npm/v/mobx-miniprogram-lite.svg?style=flat)](https://www.npmjs.com/package/mobx-miniprogram-lite) [![test coverage](https://img.shields.io/badge/coverage-95.68%25-green)]()
+
 <p style="text-align:center;">
   <span>简体中文</span> |
   <a href="./README_en_US.md">English</a> |
