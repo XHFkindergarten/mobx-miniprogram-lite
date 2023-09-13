@@ -13,5 +13,3 @@ configure({
 })
 
 export * from 'mobx'
-
-export { makeAutoObservable } from './make-auto-observable'
