@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1694526267868" clover="3.2.0">
-  <project timestamp="1694526267868" name="All files">
-    <metrics statements="247" coveredstatements="244" conditionals="99" coveredconditionals="85" methods="49" coveredmethods="49" elements="395" coveredelements="378" complexity="0" loc="247" ncloc="247" packages="1" files="9" classes="9"/>
+<coverage generated="1694692104624" clover="3.2.0">
+  <project timestamp="1694692104624" name="All files">
+    <metrics statements="222" coveredstatements="215" conditionals="88" coveredconditionals="72" methods="46" coveredmethods="45" elements="356" coveredelements="332" complexity="0" loc="222" ncloc="222" packages="1" files="8" classes="8"/>
     <file name="connect-component.ts" path="/Users/lizhaokang/fork/mobx-miniprogram-lite/src/connect-component.ts">
       <metrics statements="29" coveredstatements="29" conditionals="2" coveredconditionals="2" methods="9" coveredmethods="9"/>
       <line num="1" count="4" type="stmt"/>
@@ -38,61 +38,61 @@
       <metrics statements="26" coveredstatements="26" conditionals="2" coveredconditionals="2" methods="8" coveredmethods="8"/>
       <line num="1" count="4" type="stmt"/>
       <line num="3" count="4" type="stmt"/>
-      <line num="13" count="2" type="stmt"/>
       <line num="14" count="2" type="stmt"/>
-      <line num="16" count="2" type="stmt"/>
-      <line num="18" count="2" type="stmt"/>
-      <line num="21" count="2" type="stmt"/>
-      <line num="22" count="7" type="stmt"/>
+      <line num="15" count="2" type="stmt"/>
+      <line num="17" count="2" type="stmt"/>
+      <line num="19" count="2" type="stmt"/>
+      <line num="22" count="2" type="stmt"/>
       <line num="23" count="7" type="stmt"/>
       <line num="24" count="7" type="stmt"/>
       <line num="25" count="7" type="stmt"/>
-      <line num="27" count="18" type="cond" truecount="1" falsecount="0"/>
-      <line num="28" count="17" type="stmt"/>
+      <line num="26" count="7" type="stmt"/>
+      <line num="28" count="18" type="cond" truecount="1" falsecount="0"/>
       <line num="29" count="17" type="stmt"/>
-      <line num="32" count="7" type="stmt"/>
+      <line num="30" count="17" type="stmt"/>
       <line num="33" count="7" type="stmt"/>
-      <line num="34" count="7" type="cond" truecount="1" falsecount="0"/>
-      <line num="36" count="7" type="stmt"/>
-      <line num="43" count="7" type="stmt"/>
+      <line num="34" count="7" type="stmt"/>
+      <line num="35" count="7" type="cond" truecount="1" falsecount="0"/>
+      <line num="37" count="7" type="stmt"/>
       <line num="44" count="7" type="stmt"/>
       <line num="45" count="7" type="stmt"/>
-      <line num="50" count="7" type="stmt"/>
-      <line num="52" count="7" type="stmt"/>
-      <line num="55" count="7" type="stmt"/>
-      <line num="61" count="2" type="stmt"/>
-      <line num="63" count="2" type="stmt"/>
+      <line num="46" count="7" type="stmt"/>
+      <line num="51" count="7" type="stmt"/>
+      <line num="53" count="7" type="stmt"/>
+      <line num="56" count="7" type="stmt"/>
+      <line num="62" count="2" type="stmt"/>
+      <line num="64" count="2" type="stmt"/>
     </file>
     <file name="const.ts" path="/Users/lizhaokang/fork/mobx-miniprogram-lite/src/const.ts">
       <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <line num="1" count="597" type="stmt"/>
+      <line num="1" count="456" type="stmt"/>
       <line num="2" count="1174" type="stmt"/>
-      <line num="3" count="693" type="stmt"/>
-      <line num="4" count="597" type="stmt"/>
+      <line num="3" count="490" type="stmt"/>
+      <line num="4" count="456" type="stmt"/>
       <line num="5" count="932" type="stmt"/>
     </file>
     <file name="diff.ts" path="/Users/lizhaokang/fork/mobx-miniprogram-lite/src/diff.ts">
-      <metrics statements="58" coveredstatements="56" conditionals="48" coveredconditionals="42" methods="9" coveredmethods="9"/>
+      <metrics statements="58" coveredstatements="56" conditionals="48" coveredconditionals="41" methods="9" coveredmethods="9"/>
       <line num="1" count="4" type="stmt"/>
       <line num="3" count="36" type="stmt"/>
       <line num="4" count="36" type="stmt"/>
       <line num="5" count="36" type="stmt"/>
       <line num="6" count="36" type="stmt"/>
       <line num="7" count="36" type="stmt"/>
-      <line num="11" count="576" type="cond" truecount="1" falsecount="0"/>
+      <line num="11" count="486" type="cond" truecount="1" falsecount="0"/>
       <line num="12" count="308" type="stmt"/>
       <line num="13" count="308" type="stmt"/>
       <line num="14" count="308" type="cond" truecount="4" falsecount="0"/>
       <line num="15" count="180" type="stmt"/>
-      <line num="16" count="452" type="stmt"/>
-      <line num="17" count="452" type="cond" truecount="2" falsecount="0"/>
+      <line num="16" count="362" type="stmt"/>
+      <line num="17" count="362" type="cond" truecount="2" falsecount="0"/>
       <line num="18" count="2" type="stmt"/>
-      <line num="20" count="450" type="stmt"/>
+      <line num="20" count="360" type="stmt"/>
       <line num="23" count="128" type="cond" truecount="3" falsecount="0"/>
       <line num="24" count="110" type="cond" truecount="1" falsecount="0"/>
       <line num="25" count="106" type="stmt"/>
       <line num="26" count="90" type="stmt"/>
-      <line num="33" count="228" type="cond" truecount="1" falsecount="0"/>
+      <line num="33" count="138" type="cond" truecount="0" falsecount="1"/>
       <line num="34" count="138" type="stmt"/>
       <line num="35" count="138" type="stmt"/>
       <line num="36" count="138" type="cond" truecount="2" falsecount="0"/>
@@ -117,8 +117,8 @@
       <line num="71" count="90" type="cond" truecount="1" falsecount="1"/>
       <line num="75" count="0" type="stmt"/>
       <line num="77" count="90" type="stmt"/>
-      <line num="79" count="94" type="stmt"/>
-      <line num="81" count="94" type="stmt"/>
+      <line num="79" count="4" type="stmt"/>
+      <line num="81" count="4" type="stmt"/>
       <line num="87" count="42" type="cond" truecount="2" falsecount="0"/>
       <line num="88" count="24" type="cond" truecount="1" falsecount="1"/>
       <line num="89" count="0" type="stmt"/>
@@ -127,37 +127,17 @@
       <line num="94" count="22" type="stmt"/>
       <line num="95" count="96" type="stmt"/>
       <line num="100" count="18" type="stmt"/>
-      <line num="105" count="104" type="cond" truecount="1" falsecount="1"/>
+      <line num="105" count="14" type="cond" truecount="1" falsecount="1"/>
       <line num="111" count="34" type="cond" truecount="1" falsecount="0"/>
       <line num="112" count="34" type="stmt"/>
       <line num="117" count="1646" type="stmt"/>
     </file>
     <file name="index.ts" path="/Users/lizhaokang/fork/mobx-miniprogram-lite/src/index.ts">
-      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <line num="1" count="4" type="stmt"/>
       <line num="3" count="4" type="stmt"/>
       <line num="4" count="4" type="stmt"/>
       <line num="9" count="4" type="stmt"/>
-      <line num="17" count="16" type="stmt"/>
-    </file>
-    <file name="make-auto-observable.ts" path="/Users/lizhaokang/fork/mobx-miniprogram-lite/src/make-auto-observable.ts">
-      <metrics statements="16" coveredstatements="16" conditionals="5" coveredconditionals="5" methods="2" coveredmethods="2"/>
-      <line num="6" count="4" type="stmt"/>
-      <line num="7" count="4" type="stmt"/>
-      <line num="12" count="4" type="stmt"/>
-      <line num="14" count="16" type="stmt"/>
-      <line num="27" count="16" type="stmt"/>
-      <line num="30" count="32" type="stmt"/>
-      <line num="31" count="96" type="cond" truecount="1" falsecount="0"/>
-      <line num="32" count="80" type="cond" truecount="3" falsecount="0"/>
-      <line num="33" count="22" type="stmt"/>
-      <line num="41" count="16" type="stmt"/>
-      <line num="43" count="16" type="stmt"/>
-      <line num="45" count="16" type="cond" truecount="1" falsecount="0"/>
-      <line num="46" count="16" type="stmt"/>
-      <line num="47" count="16" type="stmt"/>
-      <line num="50" count="16" type="stmt"/>
-      <line num="52" count="16" type="stmt"/>
     </file>
     <file name="shim-store-map.ts" path="/Users/lizhaokang/fork/mobx-miniprogram-lite/src/shim-store-map.ts">
       <metrics statements="62" coveredstatements="61" conditionals="19" coveredconditionals="14" methods="14" coveredmethods="14"/>
@@ -225,56 +205,48 @@
       <line num="129" count="80" type="stmt"/>
     </file>
     <file name="traverse.ts" path="/Users/lizhaokang/fork/mobx-miniprogram-lite/src/traverse.ts">
-      <metrics statements="39" coveredstatements="39" conditionals="20" coveredconditionals="18" methods="4" coveredmethods="4"/>
+      <metrics statements="31" coveredstatements="30" conditionals="14" coveredconditionals="11" methods="3" coveredmethods="3"/>
       <line num="1" count="4" type="stmt"/>
       <line num="2" count="4" type="stmt"/>
       <line num="3" count="4" type="stmt"/>
       <line num="5" count="62" type="stmt"/>
-      <line num="7" count="1196" type="cond" truecount="1" falsecount="0"/>
-      <line num="9" count="974" type="cond" truecount="1" falsecount="0"/>
-      <line num="14" count="377" type="stmt"/>
-      <line num="16" count="597" type="stmt"/>
-      <line num="19" count="597" type="cond" truecount="0" falsecount="1"/>
-      <line num="23" count="597" type="cond" truecount="3" falsecount="0"/>
+      <line num="7" count="773" type="cond" truecount="1" falsecount="0"/>
+      <line num="9" count="692" type="cond" truecount="1" falsecount="0"/>
+      <line num="14" count="236" type="stmt"/>
+      <line num="16" count="456" type="stmt"/>
+      <line num="19" count="456" type="cond" truecount="0" falsecount="1"/>
+      <line num="23" count="456" type="cond" truecount="3" falsecount="0"/>
       <line num="24" count="174" type="stmt"/>
       <line num="25" count="174" type="stmt"/>
       <line num="26" count="145" type="stmt"/>
       <line num="28" count="174" type="stmt"/>
-      <line num="31" count="423" type="cond" truecount="0" falsecount="1"/>
-      <line num="32" count="423" type="stmt"/>
-      <line num="35" count="423" type="stmt"/>
-      <line num="36" count="989" type="stmt"/>
-      <line num="39" count="423" type="stmt"/>
+      <line num="31" count="282" type="cond" truecount="0" falsecount="1"/>
+      <line num="32" count="282" type="stmt"/>
+      <line num="35" count="282" type="stmt"/>
+      <line num="36" count="566" type="stmt"/>
+      <line num="39" count="282" type="stmt"/>
       <line num="43" count="13" type="stmt"/>
-      <line num="45" count="436" type="stmt"/>
-      <line num="48" count="436" type="stmt"/>
-      <line num="51" count="436" type="stmt"/>
-      <line num="53" count="436" type="stmt"/>
-      <line num="55" count="436" type="stmt"/>
-      <line num="56" count="2689" type="cond" truecount="2" falsecount="0"/>
-      <line num="57" count="1815" type="stmt"/>
-      <line num="58" count="874" type="cond" truecount="2" falsecount="0"/>
-      <line num="59" count="733" type="stmt"/>
-      <line num="61" count="141" type="stmt"/>
-      <line num="65" count="436" type="stmt"/>
-      <line num="68" count="436" type="cond" truecount="1" falsecount="0"/>
-      <line num="69" count="295" type="stmt"/>
-      <line num="70" count="295" type="stmt"/>
-      <line num="72" count="2154" type="cond" truecount="1" falsecount="0"/>
-      <line num="77" count="26" type="stmt"/>
-      <line num="79" count="2128" type="cond" truecount="1" falsecount="0"/>
-      <line num="80" count="141" type="stmt"/>
-      <line num="85" count="436" type="stmt"/>
+      <line num="45" count="295" type="stmt"/>
+      <line num="48" count="295" type="stmt"/>
+      <line num="51" count="295" type="stmt"/>
+      <line num="53" count="295" type="stmt"/>
+      <line num="55" count="295" type="stmt"/>
+      <line num="56" count="702" type="cond" truecount="2" falsecount="0"/>
+      <line num="57" count="110" type="stmt"/>
+      <line num="58" count="592" type="cond" truecount="1" falsecount="1"/>
+      <line num="59" count="592" type="stmt"/>
+      <line num="61" count="0" type="stmt"/>
+      <line num="88" count="295" type="stmt"/>
     </file>
     <file name="utils.ts" path="/Users/lizhaokang/fork/mobx-miniprogram-lite/src/utils.ts">
-      <metrics statements="7" coveredstatements="7" conditionals="3" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <metrics statements="7" coveredstatements="4" conditionals="3" coveredconditionals="2" methods="3" coveredmethods="2"/>
       <line num="1" count="4" type="stmt"/>
-      <line num="3" count="659" type="stmt"/>
-      <line num="5" count="62" type="stmt"/>
-      <line num="6" count="62" type="cond" truecount="0" falsecount="1"/>
-      <line num="7" count="62" type="stmt"/>
-      <line num="10" count="423" type="stmt"/>
-      <line num="11" count="423" type="cond" truecount="2" falsecount="0"/>
+      <line num="3" count="456" type="stmt"/>
+      <line num="5" count="0" type="stmt"/>
+      <line num="6" count="0" type="cond" truecount="0" falsecount="1"/>
+      <line num="7" count="0" type="stmt"/>
+      <line num="10" count="282" type="stmt"/>
+      <line num="11" count="282" type="cond" truecount="2" falsecount="0"/>
     </file>
   </project>
 </coverage>

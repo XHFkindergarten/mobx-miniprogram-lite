@@ -1,4 +1,4 @@
-import { getType, isFunction, isObject } from '@/utils'
+import { getType, isObject } from '@/utils'
 import { DATE_TYPE, FUN_TYPE, REG_TYPE } from '@/const'
 import { isObservableArray } from 'mobx'
 
@@ -61,26 +61,29 @@ export function getSerializableKeys(model: Record<string, any>) {
       propKeys.push(key)
     }
   }
+  // some getters will be defined in prototype?
+  // const proto = Object.getPrototypeOf(model)
 
-  const proto = Object.getPrototypeOf(model)
-
-  // in class, getter property is invisible to instance
-  if (proto) {
-    const protoDescriptors = Object.getOwnPropertyDescriptors(proto)
-    Object.keys(protoDescriptors).forEach((key) => {
-      // class override property: highest priority
-      if (
-        propKeys.includes(key) ||
-        computedKeys.includes(key) ||
-        excludeKeys.includes(key)
-      )
-        return
-      // getter
-      if (protoDescriptors[key].get) {
-        computedKeys.push(key)
-      }
-    })
-  }
+  // // in class, getter property is invisible to instance
+  // if (proto) {
+  //   const protoDescriptors = Object.getOwnPropertyDescriptors(proto)
+  //   Object.keys(protoDescriptors).forEach((key) => {
+  //     // class override property: highest priority
+  //     if (
+  //       propKeys.includes(key) ||
+  //       computedKeys.includes(key) ||
+  //       excludeKeys.includes(key) ||
+  //       IGNORE_PROPS.includes(key)
+  //     )
+  //       return
+  //     // getter
+  //     if (protoDescriptors[key].get) {
+  //       if (key.includes('buttonText') || key.includes('cate'))
+  //         console.warn('proto key', key)
+  //       computedKeys.push(key)
+  //     }
+  //   })
+  // }
 
   return computedKeys.concat(propKeys)
 }
