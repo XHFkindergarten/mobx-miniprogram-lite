@@ -1,11 +1,8 @@
 import '@tests/utils/mock-page'
-import { connectPage } from '@/connect-page'
-import {
-  TodoProps,
-  arrayStore
-} from '@tests/playgrounds/basic/stores/array.store'
+import { connectComponent } from '@/connect-component'
+import { TodoProps, arrayStore } from '@tests/stores/todo.store'
 
-connectPage({
+connectComponent({
   store: {
     arr: arrayStore
   },

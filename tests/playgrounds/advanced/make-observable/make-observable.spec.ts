@@ -1,10 +1,9 @@
-import '@tests/utils/mock-page'
 import path from 'path'
 import simulate from 'miniprogram-simulate'
-import { arrayStore } from '@tests/playgrounds/basic/stores/array.store'
+import { arrayStore } from '@tests/stores/todo.store'
 import { getRandomTitle } from '@tests/utils'
 
-describe('array', () => {
+describe('make-observable todo', () => {
   let id: string
 
   beforeAll(() => {
@@ -126,7 +125,16 @@ describe('array', () => {
 
     expect(snapshot1).toEqual(snapshot2)
 
-    container.detach()
+    // container.detach()
+
+    const container2 = simulate.render(id)
+    const parent2 = document.createElement('parent-wrapper')
+
+    container2.attach(parent2)
+
+    const snapshot3 = container2.toJSON()
+
+    expect(snapshot3).toEqual(snapshot2)
   })
 
   test('add note', async () => {

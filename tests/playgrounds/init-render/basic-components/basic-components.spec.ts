@@ -1,8 +1,7 @@
-import '@tests/utils/mock-page'
 import path from 'path'
 import simulate from 'miniprogram-simulate'
 
-describe('basic components', () => {
+describe('basic component', () => {
   let id: string
 
   beforeAll(() => {

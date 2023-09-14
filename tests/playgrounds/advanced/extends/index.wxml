@@ -1,0 +1,8 @@
+<view>{{extends.hyperValue}}</view>
+<view>{{extends.doubleHyperValue}}</view>
+<view>{{extends.superValue}}</view>
+<view>{{extends.doubleSuperValue}}</view>
+<view>{{extends.decHyperValue}}</view>
+<view>{{extends.decDoubleHyperValue}}</view>
+<view>{{extends.value}}</view>
+<view>{{extends.doubleValue}}</view>

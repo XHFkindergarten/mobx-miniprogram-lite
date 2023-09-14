@@ -1,9 +1,9 @@
 import path from 'path'
 import simulate from 'miniprogram-simulate'
-import { arrayStore } from '@tests/playgrounds/basic/stores/array.store'
+import { arrayStore } from '@tests/stores/todo.store'
 import { getRandomTitle } from '@tests/utils'
 
-describe('array', () => {
+describe('todo-component', () => {
   let id: string
 
   beforeAll(() => {

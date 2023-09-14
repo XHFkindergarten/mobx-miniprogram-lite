@@ -1,5 +1,5 @@
 import { connectComponent } from '@/connect-component'
-import { countStore } from '../stores/count.store'
+import { countStore } from '../../../stores/count.store'
 
 connectComponent({
   store: {
