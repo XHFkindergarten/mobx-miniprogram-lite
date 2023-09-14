@@ -350,3 +350,15 @@ connectPage({
 ```
 
 Interactive events often need to be processed in mini program event processing functions. This part of the logic belongs to the view layer. If written together with the data layer logic, it will cause coupling and pollution. Therefore, it is recommended that developers separate the view layer logic and data layer logic.
+
+## Performance
+
+Since the bottom layer of mobx-miniprogram-lite deeply traverses observable objects, as the amount of data increases, the performance loss will also increase linearly. If the amount of your business data is very large, please use it with caution.
+
+The following is the approximate additional calculation time caused by the number of data items (compared to native setData):
+
+| Number of data items | Time consumption (milliseconds) |
+| -------------------- | ------------------------------- |
+| 100                  | 1                               |
+| 1000                 | 3                               |
+| 10000                | 30                              |
