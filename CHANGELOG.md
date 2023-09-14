@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3-alpha.2](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.3-alpha.1...mobx-miniprogram-lite0.0.3-alpha.2) (2023-09-14)
+
+
+### Features
+
+* 🎸 remove make-auto-observable api ([ef0d1a0](https://github.com/XHFkindergarten/mobx-miniprogram-lite/commit/ef0d1a04861f577f8d8e7af03cb80398c2ff2ad0))
+* 🎸 remove prototype getter logic ([3633591](https://github.com/XHFkindergarten/mobx-miniprogram-lite/commit/3633591eae57004749d16bf366f75cf8ab5e5aa1))
+
 ### [0.0.3-alpha.1](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.3-alpha.0...mobx-miniprogram-lite0.0.3-alpha.1) (2023-09-12)
 
 
