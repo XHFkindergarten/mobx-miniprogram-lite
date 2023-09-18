@@ -1,4 +1,5 @@
 import { StoreListener, shimStoreMap } from './shim-store-map'
+import type { OnSetData } from './type'
 
 export const connectComponent = <
   TData extends WechatMiniprogram.Component.DataOption,
@@ -14,13 +15,13 @@ export const connectComponent = <
     TMethod,
     TCustomInstanceProperty & { store: TStore },
     TIsPage
-  > & { store: TStore }
+  > & { store: TStore; onSetStore?: OnSetData }
 ) => {
   type Instance = WechatMiniprogram.Component.Instance<
     TData,
     TProperty,
     TMethod,
-    TCustomInstanceProperty & { store: TStore },
+    TCustomInstanceProperty & { store: TStore; onSetStore?: OnSetData },
     TIsPage
   >
 
@@ -43,6 +44,7 @@ export const connectComponent = <
           if (!Object.keys(value).length) return
           wx.nextTick(() => {
             this.setData(value as Partial<TData>)
+            options.onSetStore?.call(this, value)
           })
         }).bind(this)
         listenerMap[alias] = listener

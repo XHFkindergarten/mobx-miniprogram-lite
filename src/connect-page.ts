@@ -1,10 +1,12 @@
 import { StoreListener, shimStoreMap } from './shim-store-map'
+import type { OnSetData } from './type'
 
 export const connectPage = <
   TData extends WechatMiniprogram.Page.DataOption,
   TStore extends Record<string, any>,
   TCustom extends WechatMiniprogram.Page.CustomOption & {
     store: TStore
+    onSetData?: OnSetData
   }
 >(
   options: WechatMiniprogram.Page.Options<TData, TCustom>
@@ -28,6 +30,7 @@ export const connectPage = <
         if (!Object.keys(value).length) return
         wx.nextTick(() => {
           this.setData(value as Partial<TData>)
+          options.onSetData?.call(this, value)
         })
       }).bind(this)
       listenerMap[alias] = listener
