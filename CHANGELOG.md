@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3-alpha.3](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.3-alpha.2...mobx-miniprogram-lite0.0.3-alpha.3) (2023-09-18)
+
+
+### Features
+
+* 🎸 add onSetData hook ([0d7cd6a](https://github.com/XHFkindergarten/mobx-miniprogram-lite/commit/0d7cd6a5a0dd519b9b3e4a20a219854d03d8b9f9))
+
 ### [0.0.3-alpha.2](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.3-alpha.1...mobx-miniprogram-lite0.0.3-alpha.2) (2023-09-14)
 
 
