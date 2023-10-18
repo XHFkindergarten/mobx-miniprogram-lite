@@ -1,3 +1,5 @@
+import 'es6-symbol'
+
 import { configure } from 'mobx'
 
 export { connectComponent } from './connect-component'

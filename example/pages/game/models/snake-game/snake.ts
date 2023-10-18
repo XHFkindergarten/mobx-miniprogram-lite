@@ -1,51 +1,51 @@
-import { makeAutoObservable } from "mobx-miniprogram-lite";
+import { makeAutoObservable } from '@tencent/mobx-miniprogram-lite'
 
-export type DirType = "up" | "right" | "down" | "left";
+export type DirType = 'up' | 'right' | 'down' | 'left'
 
 export class Snake {
-  body: number[];
-  dir: DirType;
+  body: number[]
+  dir: DirType
   constructor() {
-    this.body = [3, 1, 2, 1, 1, 1];
-    this.dir = "right";
+    this.body = [3, 1, 2, 1, 1, 1]
+    this.dir = 'right'
     makeAutoObservable(this)
   }
 
   move(eating: boolean) {
-    const b = this.body;
+    const b = this.body
     if (!eating) {
-      b.pop();
-      b.pop();
+      b.pop()
+      b.pop()
     }
 
     switch (this.dir) {
-      case "up":
-        b.unshift(b[0], b[1] - 1);
-        break;
-      case "right":
-        b.unshift(b[0] + 1, b[1]);
-        break;
-      case "down":
-        b.unshift(b[0], b[1] + 1);
-        break;
-      case "left":
-        b.unshift(b[0] - 1, b[1]);
-        break;
+      case 'up':
+        b.unshift(b[0], b[1] - 1)
+        break
+      case 'right':
+        b.unshift(b[0] + 1, b[1])
+        break
+      case 'down':
+        b.unshift(b[0], b[1] + 1)
+        break
+      case 'left':
+        b.unshift(b[0] - 1, b[1])
+        break
     }
   }
 
   turnUp() {
-    if (this.dir !== "down") this.dir = "up";
+    if (this.dir !== 'down') this.dir = 'up'
   }
   turnRight() {
-    if (this.dir !== "left") this.dir = "right";
+    if (this.dir !== 'left') this.dir = 'right'
   }
   turnDown() {
-    if (this.dir !== "up") this.dir = "down";
+    if (this.dir !== 'up') this.dir = 'down'
   }
   turnLeft() {
-    if (this.dir !== "right") this.dir = "left";
+    if (this.dir !== 'right') this.dir = 'left'
   }
 }
 
-export default Snake;
+export default Snake

@@ -1,41 +1,41 @@
-import { connectPage } from "mobx-miniprogram-lite";
-import { gameStore } from "./store/game-store";
+import { connectPage } from '@tencent/mobx-miniprogram-lite'
+import { gameStore } from './store/game-store'
 
 connectPage({
   store: {
     game: gameStore
   },
   onLoad() {
-    gameStore.start();
+    gameStore.start()
   },
   onHide() {
-    gameStore.stop();
+    gameStore.stop()
   },
   onUnload() {
-    gameStore.stop();
+    gameStore.stop()
   },
   turnUp() {
-    gameStore.turnUp();
+    gameStore.turnUp()
   },
   turnDown() {
-    gameStore.turnDown();
+    gameStore.turnDown()
   },
   turnLeft() {
-    gameStore.turnLeft();
+    gameStore.turnLeft()
   },
   turnRight() {
-    gameStore.turnRight();
+    gameStore.turnRight()
   },
   toggleSpeed() {
-    gameStore.toggleSpeed();
+    gameStore.toggleSpeed()
   },
   reset() {
-    gameStore.reset();
+    gameStore.reset()
   },
   pauseOrPlay() {
-    gameStore.pauseOrPlay();
+    gameStore.pauseOrPlay()
   },
   back() {
     wx.navigateBack()
   }
-});
+})

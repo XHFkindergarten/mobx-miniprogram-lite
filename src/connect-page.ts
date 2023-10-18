@@ -1,12 +1,10 @@
-import { StoreListener, shimStoreMap } from './shim-store-map'
-import type { OnSetData } from './type'
+import { Data, getStoreInstance, Model, StoreListener } from '@/store-map'
 
 export const connectPage = <
   TData extends WechatMiniprogram.Page.DataOption,
   TStore extends Record<string, any>,
   TCustom extends WechatMiniprogram.Page.CustomOption & {
     store: TStore
-    onSetData?: OnSetData
   }
 >(
   options: WechatMiniprogram.Page.Options<TData, TCustom>
@@ -18,25 +16,32 @@ export const connectPage = <
 
   const store = options.store
 
-  const listenerMap: Record<string, StoreListener> = {}
+  function listenerFactory(this: Instance, prefix: string, _value: any) {
+    // nothing changed
+    if (!Object.keys(_value).length) return
+    const value = Object.entries(_value).reduce<Model>((prev, [key, value]) => {
+      prev[prefix + key] = value
+      return prev
+    }, {})
+    wx.nextTick(() => {
+      this.setData(value as Partial<TData>)
+    })
+  }
+
+  const listeners: StoreListener[] = []
 
   // create listeners
   const replaceOnLoad = function (this: Instance) {
-    let formatedData: Record<string, any> = {}
-    Object.entries(store).forEach(([alias, model]: [string, any]) => {
-      const reaction = shimStoreMap.createReaction(model, `${alias}.`)
-      const listener: StoreListener = ((value: any) => {
-        // nothing changed
-        if (!Object.keys(value).length) return
-        wx.nextTick(() => {
-          this.setData(value as Partial<TData>)
-          options.onSetData?.call(this, value)
-        })
-      }).bind(this)
-      listenerMap[alias] = listener
-      shimStoreMap.setListener(model, listener)
-      if (reaction.state) formatedData[alias] = reaction.state
+    let formatedData: Model = {}
+
+    Object.entries(store).forEach(([name, model]: [string, Data]) => {
+      const listener = listenerFactory.bind(this, name + '.')
+      const storeInst = getStoreInstance(model)
+      storeInst.bindListener(listener)
+      listeners.push(listener)
+      formatedData[name] = storeInst.latestData
     })
+    // initial setData
     this.setData({
       ...formatedData
     } as Partial<TData>)
@@ -52,11 +57,12 @@ export const connectPage = <
   // @override onUnload
   function onUnload(this: Instance, ...args: any[]) {
     Object.entries(store as NonNullable<typeof store>).forEach(
-      ([alias, model]) => {
-        shimStoreMap.unregisterListener(model, listenerMap[alias])
+      ([name, model]) => {
+        const storeInst = getStoreInstance(model)
+        listeners.forEach((listener) => storeInst.unbindListener(listener))
       }
     )
-    _onUnload?.call(this)
+    _onUnload?.apply(this, args as [])
   }
 
   // miniprogram runtime will deep-clone option-properties, and make mobx's behavior unpredictable

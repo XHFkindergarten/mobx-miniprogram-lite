@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@tencent/mobx-miniprogram-lite": "0.0.3-alpha.3",
     "mobx-miniprogram-lite": "0.0.3-alpha.1"
   },
   "devDependencies": {

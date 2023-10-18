@@ -1,21 +1,21 @@
 <block>
   <view class="footer">
     <view class="todo-count">
-      <text class="strong">{{todo.left + ' '}}</text>
+      <text class="strong">{{todo1.left + ' '}}</text>
       items left
     </view>
     <view class="filters">
       <view class="ib" bindtap="showAll">
-        <text class="{{todo.type === 'all' ? 'selected' : ''}}">All</text>
+        <text class="{{todo1.type === 'all' ? 'selected' : ''}}">All</text>
       </view>
       <view class="ib" bindtap="showActive">
-        <text class="{{todo.type === 'active' ? 'selected' : ''}}">Active</text>
+        <text class="{{todo1.type === 'active' ? 'selected' : ''}}">Active</text>
       </view>
       <view class="ib" bindtap="showDone">
-        <text class="{{todo.type === 'done' ? 'selected' : ''}}">Done</text>
+        <text class="{{todo1.type === 'done' ? 'selected' : ''}}">Done</text>
       </view>
     </view>
-    <block wx:if="{{todo.done > 0}}">
+    <block wx:if="{{todo1.done > 0}}">
       <button class="clear-completed" bindtap="clearDone">Clear done</button>
     </block>
     <block wx:else>

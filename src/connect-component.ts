@@ -1,5 +1,4 @@
-import { StoreListener, shimStoreMap } from './shim-store-map'
-import type { OnSetData } from './type'
+import { Model, StoreListener, getStoreInstance } from '@/store-map'
 
 export const connectComponent = <
   TData extends WechatMiniprogram.Component.DataOption,
@@ -15,13 +14,17 @@ export const connectComponent = <
     TMethod,
     TCustomInstanceProperty & { store: TStore },
     TIsPage
-  > & { store: TStore; onSetStore?: OnSetData }
+  > & {
+    store: TStore
+  }
 ) => {
   type Instance = WechatMiniprogram.Component.Instance<
     TData,
     TProperty,
     TMethod,
-    TCustomInstanceProperty & { store: TStore; onSetStore?: OnSetData },
+    TCustomInstanceProperty & {
+      store: TStore
+    },
     TIsPage
   >
 
@@ -31,27 +34,33 @@ export const connectComponent = <
 
   const store = options.store
 
-  const listenerMap: Record<string, StoreListener> = {}
+  function listenerFactory(this: Instance, prefix: string, _value: any) {
+    // nothing changed
+    if (!Object.keys(_value).length) return
+    const value = Object.entries(_value).reduce<Model>((prev, [key, value]) => {
+      prev[prefix + key] = value
+      return prev
+    }, {})
+    wx.nextTick(() => {
+      this.setData(value as Partial<TData>)
+    })
+  }
+
+  const listeners: StoreListener[] = []
 
   // create listeners
   const replaceAttached = function (this: Instance) {
     let formatedData: Record<string, any> = {}
-    Object.entries(store as Record<string, any>).forEach(
-      ([alias, model]: [string, any]) => {
-        const reaction = shimStoreMap.createReaction(model, `${alias}.`)
-        const listener: StoreListener = ((value: any) => {
-          // nothing changed
-          if (!Object.keys(value).length) return
-          wx.nextTick(() => {
-            this.setData(value as Partial<TData>)
-            options.onSetStore?.call(this, value)
-          })
-        }).bind(this)
-        listenerMap[alias] = listener
-        shimStoreMap.setListener(model, listener)
-        if (reaction.state) formatedData[alias] = reaction.state
-      }
-    )
+
+    Object.entries(store as {}).forEach(([name, model]: [string, any]) => {
+      const listener = listenerFactory.bind(this, name + '.')
+      const storeInst = getStoreInstance(model)
+      storeInst.bindListener(listener)
+      listeners.push(listener)
+      formatedData[name] = storeInst.latestData
+    })
+
+    // initial setData
     this.setData({
       ...formatedData
     } as Partial<TData>)
@@ -66,8 +75,9 @@ export const connectComponent = <
   // @override detached
   function detached(this: Instance) {
     Object.entries(store as NonNullable<typeof store>).forEach(
-      ([alias, model]) => {
-        shimStoreMap.unregisterListener(model, listenerMap[alias])
+      ([name, model]) => {
+        const storeInst = getStoreInstance(model)
+        listeners.forEach((listener) => storeInst.unbindListener(listener))
       }
     )
     _detached?.call(this)

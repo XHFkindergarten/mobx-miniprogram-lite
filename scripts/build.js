@@ -34,7 +34,7 @@ const shouldWatch =
       treeShaking: true,
       format: 'esm',
       tsconfig: join(basePath, 'tsconfig.json'),
-      minify: !shouldWatch
+      minify: !shouldWatch,
     })
 
     /** @type {import('esbuild').BuildContext} */
