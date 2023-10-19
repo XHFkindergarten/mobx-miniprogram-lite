@@ -120,7 +120,7 @@ https://developers.weixin.qq.com/s/7U4VcFmN7pKx
 
 ### Create observable data
 
-#### [observable](https://mobx.js.org/observable-state.html#observable): Make a data structure observable.
+- [observable](https://mobx.js.org/observable-state.html#observable): Make a data structure observable.
 
 The data and its deep data will become observable, the getter functions will become computed data, and the function attributes will become action functions.
 
@@ -145,7 +145,7 @@ const counter = observable({
 })
 ```
 
-#### [makeObservable](https://mobx.js.org/observable-state.html#makeobservable)
+- [makeObservable](https://mobx.js.org/observable-state.html#makeobservable)
 
 It has the same effect as observable, but works on class data. The first parameter is an instance of the class, and the second parameter is used to perform type assertions on the attributes of the class.
 
@@ -195,7 +195,7 @@ class SubClass extends Doubler {
 }
 ```
 
-#### [makeAutoObservable](https://mobx.js.org/observable-state.html#makeautoobservable)
+- [makeAutoObservable](https://mobx.js.org/observable-state.html#makeautoobservable)
 
 makeAutoObservable is the automatic inference mode of makeObservable, which automatically infers `observable`, `action`, `computed` and other types according to the type of the attribute. But relatively speaking, there are certain restrictions, such as it cannot be used in subclasses.
 
@@ -205,8 +205,17 @@ import { makeAutoObservable } from 'mobx-miniprogram-lite'
 class Doubler {
   value
 
+  readonly description = '静态字段'
+
   constructor(value) {
-    makeAutoObservable(this)
+    makeAutoObservable(
+      this,
+      // like makeObservable, the second parameter override supports specifying the field type
+      {
+        // mark the description field as unobservable
+        description: false
+      }
+    )
     this.value = value
   }
 
@@ -227,47 +236,139 @@ class Doubler {
 
 ### update data
 
-Developers do not need to pay extra attention to the **synchronization** functions and **iterator** functions wrapped by `observable`, `makeObservable`, and `makeAutoObservable`, because they have been processed by mobx as action functions. However, for the following situations, developers need to declare actions manually.
+> [Updating state using actions](https://mobx.js.org/actions.html)
 
-#### Non-action functions update observed data
+When we want to update a data observed by mobx, this operation should be done through **`action`** (this is not required for mobx, but it is highly recommended). You can see similar concepts when using any state management library. The benefits of this are:
+
+1. Actions will be executed in the _transaction_ of mobx. When multiple actions are triggered at the same time, they will be batched. The intermediate state will not be exposed to the outside to avoid causing some bugs.
+2. Explicitly declaring actions can help developers better organize their code and clarify how data updates are triggered when locating problems.
+
+Compared with other state management libraries, mobx has its special features - it does not rely on specific API syntax and can trigger state updates through native JS assignment. While this brings great convenience to developers, it also brings certain risks. Imagine that there are N direct changes to data in a large project. It is difficult for developers to locate which change when locating the problem. led to the final result.
+
+mobx has `enforceActions: true` turned on by default. If the data is modified directly without action during runtime, the console will throw a warning: _[MobX] Since strict-mode is enabled, changing (observed) observable values without using an action is not allowed. Tried to modify: XXStore@XXProperty._
+
+- observable
 
 ```typescript
 import { observable, action } from 'mobx-miniprogram-lite'
 
+// ✅
+const counter = observable({
+  value: 0,
+  // sync functions wrapped in observable automatically become actions
+  updateValue() {
+    this.value++
+  }
+})
+
+// ❌
 const counter = observable({
   value: 0
 })
-
-let updateValue = () => {
+const updateValue = () => {
+  // non-action
   counter.value++
 }
-
-// Call the action API to convert the function into an action function
-updateValue = action(updateValue)
-```
-
-#### Asynchronous update (async/Promise)
-
-```typescript
-import { observable, action, runInAction } from 'mobx-miniprogram-lite'
+// ✅
 const counter = observable({
   value: 0
 })
+// Use the `action` wrapper to make the function an action function
+const updateValue = action(() => {
+  counter.value++
+})
+```
 
-fetch('/new/counter').then(
-  // Use action to wrap asynchronous callback
-  action((res) => {
-    counter.value = res.value
-  })
-)
+- makeAutoObservable
 
-const updateAsync = async () => {
-  const { value } = await fetch('/new/counter')
-  //Update data in runInAction
-  runInAction(() => {
-    counter.value = value
-  })
+```typescript
+import { makeAutoObservable } from 'mobx-miniprogram-lite'
+
+class Store {
+  constructor() {
+    makeAutoObservable(this)
+  }
+
+  value = 0
+
+  // Like observable, makeAutoObservable will automatically identify functions in the object and wrap them as actions.
+  updateValue() {
+    this.value++
+  }
 }
+```
+
+- makeObservable
+
+```typescript
+import { makeObservable, observable, action } from 'mobx-miniprogram-lite'
+
+class Store {
+  constructor() {
+    makeObservable(this, {
+      value: observable,
+      // Manually declare updateValue to be an action
+      updateValue: action
+    })
+  }
+
+  value = 0
+
+  updateValue() {
+    this.value++
+  }
+}
+```
+
+- Asynchronous updates
+
+Since mobx transactions are synchronous, asynchronous data updates cannot be captured by transactions, and asynchronous functions cannot be packaged into actions.
+
+```typescript
+import { observable, runInAction } from 'mobx-miniprogram-lite'
+
+// ❌
+const counter = observable({
+  value: 0,
+  async updateValueAsync() {
+    // do something
+    await fetchData()
+
+    // update
+    this.value++ // warning will still be thrown
+  }
+})
+
+// ✅
+const counter = observable({
+  value: 0,
+  updateValue() {
+    this.value++
+  }
+  async updateValueAsync() {
+    // do something
+    await fetchData()
+
+    // Since updateValue is an action, the data is updated within a transaction
+    this.updateValue()
+  }
+})
+
+// ✅
+const counter = observable({
+  value: 0,
+  async updateValueAsync() {
+    // do something
+    await fetchData()
+
+    // runInAction is the immediate execution version of the `action`. The function wrapped by runInAction will be executed immediately in the transaction
+    runInAction(() => {
+      this.value++
+    })
+  }
+})
+
+
 ```
 
 ### Bind to mini program component
@@ -362,3 +463,36 @@ The following is the approximate additional calculation time caused by the numbe
 | 100                  | 1                               |
 | 1000                 | 3                               |
 | 10000                | 30                              |
+
+### Optimization
+
+mobx-miniprogram-lite creates separate observation instances for each store sub-property, so do not store multiple data fields together to achieve optimal performance.
+
+```typescript
+import { connectPage, observable } from 'mobx-miniprogram-lite'
+
+// ❌
+const listStore = observable({
+  // @states-observer
+  // When loading is updated, recalculation of list will also be triggered.
+  states = {
+    list: [...], // Up to 5000 pieces of data
+    loading: false,
+  }
+})
+
+// ✅
+const listStore = observable({
+  // @list-observer
+  list: [...], // Up to 5000 pieces of data
+  // @loading-observer
+  // When the value of loading changes, only loading is recalculated
+  loading: false,
+})
+
+connectPage({
+  store: {
+    list: listStore
+  }
+})
+```

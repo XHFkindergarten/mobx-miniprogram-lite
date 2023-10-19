@@ -120,7 +120,7 @@ https://developers.weixin.qq.com/s/7U4VcFmN7pKx
 
 ### 创建可观测的数据
 
-#### [observable](https://mobx.js.org/observable-state.html#observable)：使一个数据结构变为可观测的。
+- [observable](https://mobx.js.org/observable-state.html#observable)：使一个数据结构变为可观测的。
 
 其中的数据及其深层数据均会变为可观测的，其中的 getter 函数将会变为 computed 数据，其中的函数属性将会变为 action 函数。
 
@@ -145,7 +145,7 @@ const counter = observable({
 })
 ```
 
-#### [makeObservable](https://mobx.js.org/observable-state.html#makeobservable)
+- [makeObservable](https://mobx.js.org/observable-state.html#makeobservable)
 
 和 observable 的作用一致，但是作用于 class 数据。第一个参数为类的实例，第二个参数用于对类的属性进行类型断言。
 
@@ -195,7 +195,7 @@ class SubClass extends Doubler {
 }
 ```
 
-#### [makeAutoObservable](https://mobx.js.org/observable-state.html#makeautoobservable)
+- [makeAutoObservable](https://mobx.js.org/observable-state.html#makeautoobservable)
 
 makeAutoObservable 是 makeObservable 的自动推导模式，根据属性的类型自动推断为 `observable`、`action`、`computed` 等类型。但是相对来说有一定限制，例如不能用于子类。
 
@@ -205,8 +205,17 @@ import { makeAutoObservable } from 'mobx-miniprogram-lite'
 class Doubler {
   value
 
+  readonly description = '静态字段'
+
   constructor(value) {
-    makeAutoObservable(this)
+    makeAutoObservable(
+      this,
+      // 和 makeObservable 一样，第二个参数 override 支持指定字段的类型
+      {
+        // 将 description 字段标记为无需观测
+        description: false
+      }
+    )
     this.value = value
   }
 
@@ -227,47 +236,139 @@ class Doubler {
 
 ### 更新数据
 
-对于被 `observable`、`makeObservable`、`makeAutoObservable` 包裹的 **同步**函数和 **迭代器**函数，开发者不需要额外关心，因为他们已经被 mobx 处理为了 action 函数。但是对于以下情况，需要开发者手动声明 action。
+> [Updating state using actions](https://mobx.js.org/actions.html)
 
-#### 非 action 函数更新被观测数据
+当我们希望更新一个被 mobx 观测的数据时，应该通过 **`action`** 来完成这一操作（对于 mobx 来说，这不是必须的，但是强烈推荐这样做）。当你使用任意一个状态管理库时都能够看到类似的概念，这样做的好处是：
+
+1. action 动作会在 mobx 的 _事务_ 中执行，多个 action 动作同时触发时它们将会被批处理，中间态不会对外暴露，避免导致一些 bug。
+2. 通过显式地声明 action 能够帮助开发者更好的组织代码，在定位问题时明确数据更新是如何触发的。
+
+相比其他状态管理库，mobx 有其特殊性——不依赖特定的 API 语法，通过原生 JS 赋值即可触发状态的更新。这在给开发者带来极大便利的同时，也带来了一定的风险，试想在一个大型项目中存在 N 处对数据的直接更改，开发者在定位问题时很难定位到哪一处更改导致了最终的结果。
+
+mobx 默认开启了 `enforceActions: true`，运行时如果不通过 action 而是直接修改数据，控制台将会抛出 warning：_[MobX] Since strict-mode is enabled, changing (observed) observable values without using an action is not allowed. Tried to modify: XXStore@XXProperty._
+
+- observable
 
 ```typescript
 import { observable, action } from 'mobx-miniprogram-lite'
 
+// ✅
+const counter = observable({
+  value: 0,
+  // 被 observable 包裹的【非异步】函数自动成为 action
+  updateValue() {
+    this.value++
+  }
+})
+
+// ❌
 const counter = observable({
   value: 0
 })
-
-let updateValue = () => {
+const updateValue = () => {
+  // 非 action
   counter.value++
 }
-
-// 调用 action API 将函数转换为 action 函数
-updateValue = action(updateValue)
-```
-
-#### 异步更新（async / Promise）
-
-```typescript
-import { observable, action, runInAction } from 'mobx-miniprogram-lite'
+// ✅
 const counter = observable({
   value: 0
 })
+// 使用 action 包裹，使函数成为 action 函数
+const updateValue = action(() => {
+  counter.value++
+})
+```
 
-fetch('/new/counter').then(
-  // 使用 action 包裹异步 callback
-  action((res) => {
-    counter.value = res.value
-  })
-)
+- makeAutoObservable
 
-const updateAsync = async () => {
-  const { value } = await fetch('/new/counter')
-  // 在 runInAction 中更新数据
-  runInAction(() => {
-    counter.value = value
-  })
+```typescript
+import { makeAutoObservable } from 'mobx-miniprogram-lite'
+
+class Store {
+  constructor() {
+    makeAutoObservable(this)
+  }
+
+  value = 0
+
+  // 和 observable 相同，makeAutoObservable 会自动识别对象中的函数并包装为 action。
+  updateValue() {
+    this.value++
+  }
 }
+```
+
+- makeObservable
+
+```typescript
+import { makeObservable, observable, action } from 'mobx-miniprogram-lite'
+
+class Store {
+  constructor() {
+    makeObservable(this, {
+      value: observable,
+      // 手动声明 updateValue 是一个 action
+      updateValue: action
+    })
+  }
+
+  value = 0
+
+  updateValue() {
+    this.value++
+  }
+}
+```
+
+- 异步更新
+
+由于 mobx 的事务是同步的，因此异步数据更新无法被事务捕获，异步函数也无法被包装成 action。
+
+```typescript
+import { observable, runInAction } from 'mobx-miniprogram-lite'
+
+// ❌
+const counter = observable({
+  value: 0,
+  async updateValueAsync() {
+    // do something
+    await fetchData()
+
+    // update
+    this.value++ // 仍会抛出 warning
+  }
+})
+
+// ✅
+const counter = observable({
+  value: 0,
+  updateValue() {
+    this.value++
+  }
+  async updateValueAsync() {
+    // do something
+    await fetchData()
+
+    // 由于 updateValue 是一个 action，因此数据是在事务中完成的更新
+    this.updateValue()
+  }
+})
+
+// ✅
+const counter = observable({
+  value: 0,
+  async updateValueAsync() {
+    // do something
+    await fetchData()
+
+    // runInAction 是 action 函数的立即执行版本，被 runInAction 包裹的函数会立即在事务中执行
+    runInAction(() => {
+      this.value++
+    })
+  }
+})
+
+
 ```
 
 ### 绑定到小程序组件
@@ -362,3 +463,36 @@ connectPage({
 | 100      | 1            |
 | 1000     | 3            |
 | 10000    | 30           |
+
+### 优化手段
+
+mobx-miniprogram-lite 为每一个 store 的子属性单独创建观测实例，因此不要将多个数据字段存放在一起，以此达到最优的性能。
+
+```typescript
+import { connectPage, observable } from 'mobx-miniprogram-lite'
+
+// ❌
+const listStore = observable({
+  // states-observer
+  // loading 更新时，也会触发 list 的重新计算
+  states = {
+    list: [...], // 长达 5000 条数据
+    loading: false,
+  }
+})
+
+// ✅
+const listStore = observable({
+  // list-observer
+  list: [...], // 长达 5000 条数据
+  // loading-observer
+  // 当 loading 的值发生改变时，仅重新计算 loading
+  loading: false,
+})
+
+connectPage({
+  store: {
+    list: listStore
+  }
+})
+```
