@@ -1,4 +1,4 @@
-import { connectPage } from '@tencent/mobx-miniprogram-lite'
+import { connectPage } from 'mobx-miniprogram-lite'
 import { gameStore } from './store/game-store'
 
 connectPage({

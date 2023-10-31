@@ -1,4 +1,4 @@
-import { makeAutoObservable } from '@tencent/mobx-miniprogram-lite'
+import { makeAutoObservable } from 'mobx-miniprogram-lite'
 import { Game } from '../models/snake-game/game'
 import { Snake } from '../models/snake-game/snake'
 

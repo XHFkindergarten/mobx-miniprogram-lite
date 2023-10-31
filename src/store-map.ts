@@ -1,6 +1,7 @@
 import { IReactionDisposer, reaction } from 'mobx'
 import { getSerializableKeys, traverseModel } from '@/traverse'
 import { diffData } from '@/diff'
+import { logger } from './log'
 
 export type Model = any
 
@@ -112,6 +113,12 @@ class Store {
             },
             {}
           )
+
+          logger.log({
+            name: 'diff',
+            color: 'orange',
+            value: diff
+          })
 
           this.listeners.forEach((listener) => listener.call(null, diff))
         }

@@ -1,23 +1,21 @@
-import { connectComponent } from '@tencent/mobx-miniprogram-lite'
+import { connectComponent } from 'mobx-miniprogram-lite'
 import todoStore, { Type } from '../todo-store'
 
-const store = {
-  todo1: todoStore
-}
-
 connectComponent({
-  store,
+  store: {
+    todo: todoStore
+  },
   methods: {
     showAll() {
-      this.store.todo1.filter(Type.all)
+      this.store.todo.filter(Type.all)
     },
 
     showActive() {
-      this.store.todo1.filter(Type.active)
+      this.store.todo.filter(Type.active)
     },
 
     showDone() {
-      this.store.todo1.filter(Type.done)
+      this.store.todo.filter(Type.done)
     },
 
     clearDone() {
@@ -26,7 +24,7 @@ connectComponent({
         content: '确定清空已完成任务？',
         success: (res) => {
           if (res.confirm) {
-            this.store.todo1.clearDone()
+            this.store.todo.clearDone()
           } else if (res.cancel) {
             console.log('用户点击取消')
           }
@@ -40,7 +38,7 @@ connectComponent({
         content: '确定完成所有未完成任务？',
         success: (res) => {
           if (res.confirm) {
-            this.store.todo1.todo.toggleAll(true)
+            this.store.todo.toggleAll(true)
             this.showAll()
           } else if (res.cancel) {
             console.log('用户点击取消')

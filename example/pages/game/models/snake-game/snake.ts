@@ -1,4 +1,4 @@
-import { makeAutoObservable } from '@tencent/mobx-miniprogram-lite'
+import { makeAutoObservable } from 'mobx-miniprogram-lite'
 
 export type DirType = 'up' | 'right' | 'down' | 'left'
 

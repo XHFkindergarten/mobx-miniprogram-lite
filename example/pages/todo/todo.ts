@@ -1,4 +1,4 @@
-import { connectPage } from '@tencent/mobx-miniprogram-lite'
+import { connectPage } from 'mobx-miniprogram-lite'
 import todoStore from './todo-store'
 
 connectPage({
@@ -22,9 +22,5 @@ connectPage({
 
   toggle(evt) {
     this.store.todo.toggle(evt.currentTarget.dataset.id)
-  },
-
-  back() {
-    wx.navigateBack()
   }
 })

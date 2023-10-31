@@ -1,17 +1,11 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/todo/todo",
-    "pages/game/game"
-  ],
+  "pages": ["pages/index/index", "pages/todo/todo", "pages/game/game"],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "mobx-miniprogram-lite 示例",
     "navigationBarTextStyle": "black"
   },
-  "style": "v2",
-  "renderer": "skyline",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"
 }

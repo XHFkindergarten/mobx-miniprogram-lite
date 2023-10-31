@@ -1,4 +1,4 @@
-import { makeAutoObservable, observable } from '@tencent/mobx-miniprogram-lite'
+import { makeAutoObservable } from 'mobx-miniprogram-lite'
 import { Todo } from './todo.model'
 
 export enum Type {
@@ -9,16 +9,26 @@ export enum Type {
 
 export class TodoStore {
   constructor() {
-    this.todo = new Todo()
     makeAutoObservable(this)
   }
-
-  todo: Todo
 
   // enum
   public Type = Type
 
   todoTitle = ''
+
+  type = this.Type.all
+
+  todos: Todo[] = [
+    new Todo({
+      title: '吃饭',
+      done: false
+    }),
+    new Todo({
+      title: '喝水',
+      done: true
+    })
+  ]
 
   get left() {
     return this.todos.filter((item) => !item.done).length
@@ -28,17 +38,15 @@ export class TodoStore {
     return this.todos.filter((item) => item.done).length
   }
 
-  type = this.Type.all
-
-  get todos() {
+  get list() {
     switch (this.type) {
       case Type.all:
-        return this.todo.todos
+        return this.todos
       case Type.active:
-        return this.todo.todos.filter((item) => !item.done)
+        return this.todos.filter((item) => !item.done)
 
       case Type.done:
-        return this.todo.todos.filter((item) => item.done)
+        return this.todos.filter((item) => item.done)
     }
   }
 
@@ -56,24 +64,36 @@ export class TodoStore {
 
       return
     }
-    this.todo.addTodo(this.todoTitle)
+    this.todos.push(
+      new Todo({
+        title: this.todoTitle,
+        done: false
+      })
+    )
     this.todoTitle = ''
   }
 
   toggle(id) {
-    this.todo.toggle(id)
+    const target = this.todos.find((todo) => todo.id === id)
+    target?.toggle()
   }
 
   destroy(id) {
-    this.todo.destroy(id)
+    this.todos = this.todos.filter((todo) => todo.id !== id)
   }
 
   clearDone() {
-    this.todo.clearDone()
+    this.todos = []
   }
 
   filter(type: Type) {
     this.type = type
+  }
+
+  toggleAll(value: boolean) {
+    for (const item of this.todos) {
+      item.done = value
+    }
   }
 }
 

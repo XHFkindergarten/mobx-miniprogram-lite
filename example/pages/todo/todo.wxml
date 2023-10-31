@@ -1,5 +1,4 @@
 <view class="container">
-  <view bindtap="back" class="todo-back-btn">返回</view>
   <view>
     <view class="title">todos</view>
     <!-- <image class="github" bindtap="gotoAbout" src="{{anonymousState__temp}}"></image> -->
@@ -8,7 +7,7 @@
       <button class="add-btn" bindtap="addTodo">确定</button>
     </view>
     <view class="todo-list">
-      <block wx:if="{{todo.type === todo.Type.all || todo.type === todo.Type.active && !item.done || todo.type === todo.Type.done && item.done}}" wx:key="id" wx:for="{{todo.todos}}" wx:for-item="item">
+      <block wx:if="{{todo.type === todo.Type.all || todo.type === todo.Type.active && !item.done || todo.type === todo.Type.done && item.done}}" wx:key="id" wx:for="{{todo.list}}" wx:for-item="item">
         <view class="{{'todo-item' + (item.done ? ' done' : '')}}">
           <view class="toggle" data-id="{{item.id}}" bindtap="toggle"></view>
           <text>{{item.title}}</text>

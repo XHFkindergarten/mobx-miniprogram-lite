@@ -1,4 +1,4 @@
-import { makeAutoObservable } from '@tencent/mobx-miniprogram-lite'
+import { makeAutoObservable, runInAction } from 'mobx-miniprogram-lite'
 import { Snake } from './snake'
 
 export interface GameOptions {
@@ -74,7 +74,9 @@ export class Game {
   start() {
     this.loopId = setInterval(() => {
       if (Date.now() - this._preDate > this.interval) {
-        this._preDate = Date.now()
+        runInAction(() => {
+          this._preDate = Date.now()
+        })
         if (!this.paused) {
           this.tick()
         }

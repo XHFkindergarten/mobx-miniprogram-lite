@@ -10,6 +10,7 @@
     "clean": "rimraf lib",
     "build": "pnpm clean && tsc && cross-env NODE_ENV=production node ./scripts/build.js",
     "dev": "pnpm clean && tsc -w & tsc-alias -w & cross-env NODE_ENV=development node ./scripts/build.js -w",
+    "example": "tsc -w & tsc-alias -w & cross-env NODE_ENV=development node ./scripts/dev_example.js",
     "cz": "git-cz",
     "release": "standard-version -t mobx-miniprogram-lite --release-as patch",
     "release:alpha": "standard-version -t mobx-miniprogram-lite --release-as patch --prerelease alpha",

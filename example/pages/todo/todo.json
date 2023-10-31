@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "其他测试页面",
+  "navigationBarTitleText": "待办列表",
   "usingComponents": {
     "todo-footer": "/pages/todo/todo-footer/index"
   }

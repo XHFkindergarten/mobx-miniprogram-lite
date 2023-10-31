@@ -15,3 +15,5 @@ configure({
 })
 
 export * from 'mobx'
+
+export { configureLog, ConfigureLogOptions } from './log'
