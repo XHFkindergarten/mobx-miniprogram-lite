@@ -1,5 +1,16 @@
 import { Model, StoreListener, getStoreInstance } from '@/store-map'
 
+/**
+ * Connects a MobX store to a WeChat MiniProgram component.
+ * @template TData - The type of the component data.
+ * @template TProperty - The type of the component properties.
+ * @template TMethod - The type of the component methods.
+ * @template TCustomInstanceProperty - The type of the custom instance properties.
+ * @template TIsPage - A boolean indicating whether the component is a page.
+ * @template TStore - The type of the MobX store.
+ * @param {WechatMiniprogram.Component.Options<TData, TProperty, TMethod, TCustomInstanceProperty & { store: TStore }, TIsPage> & { store: TStore }} options - The options for the component.
+ * @returns {WechatMiniprogram.Component.TrivialInstance} - The connected component.
+ */
 export const connectComponent = <
   TData extends WechatMiniprogram.Component.DataOption,
   TProperty extends WechatMiniprogram.Component.PropertyOption,

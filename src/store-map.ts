@@ -1,18 +1,33 @@
+/**
+ * @file This file exports a function that creates a new instance of a Store class for a given model.
+ * @packageDocumentation
+ */
+
 import { IReactionDisposer, reaction } from 'mobx'
 import { getSerializableKeys, traverseModel } from '@/traverse'
 import { diffData } from '@/diff'
 import { logger } from './log'
 
+/**
+ * Represents a model.
+ */
 export type Model = any
 
+/**
+ * Represents a data object.
+ */
 export type Data = Record<string, any>
 
+/**
+ * Represents a listener function for a store.
+ */
 export interface StoreListener {
   (s: Model): void
 }
 
 /**
- * global store info
+ * Returns a function that creates a new instance of a Store class for a given model.
+ * @returns A function that takes a model and returns a new instance of the Store class.
  */
 export const getStoreInstance = (() => {
   // There is no need to consider clearing the storeList & storeInstList
@@ -46,23 +61,49 @@ export const getStoreInstance = (() => {
   }
 })()
 
+/**
+ * Represents a store class.
+ */
 class Store {
+  /**
+   * Creates a new instance of the Store class.
+   * @param props An object containing the id and model properties.
+   */
   constructor(props: { id: number; model: Model }) {
     this.id = props.id
     this.model = props.model
     this.active()
   }
 
+  /**
+   * The id of the store.
+   */
   id: number
 
+  /**
+   * The model of the store.
+   */
   model: Model
 
+  /**
+   * An array of listeners for the store.
+   */
   listeners: StoreListener[] = []
 
+  /**
+   * A function that exposes the store.
+   */
   expose: (() => void) | null = null
 
+  /**
+   * The latest data of the store.
+   */
   latestData: Data = {}
 
+  /**
+   * Binds a listener to the store.
+   * @param listener The listener function to bind.
+   */
   bindListener = (listener: StoreListener) => {
     this.listeners.push(listener)
     // re-active
@@ -71,6 +112,10 @@ class Store {
     }
   }
 
+  /**
+   * Unbinds a listener from the store.
+   * @param listener The listener function to unbind.
+   */
   unbindListener = (listener: StoreListener) => {
     this.listeners = this.listeners.filter((_) => _ !== listener)
     // all components that depend on this store are uninstalled
@@ -79,6 +124,11 @@ class Store {
     }
   }
 
+  /**
+   * Creates a reaction for the store.
+   * @param model The model to create the reaction for.
+   * @returns A function that disposes the reaction.
+   */
   createReaction(model: Model) {
     // values that can be set into component's data
     const serializableKeys = getSerializableKeys(model)
@@ -132,10 +182,16 @@ class Store {
     }
   }
 
+  /**
+   * Activates the store.
+   */
   active() {
     this.expose = this.createReaction(this.model)
   }
 
+  /**
+   * Deactivates the store.
+   */
   inactive() {
     this.expose?.()
     this.expose = null

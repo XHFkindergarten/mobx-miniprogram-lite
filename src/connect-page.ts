@@ -1,5 +1,19 @@
 import { Data, getStoreInstance, Model, StoreListener } from '@/store-map'
 
+/**
+ * Connects a WeChat Mini Program page component to a MobX store.
+ *
+ * @template TData - The type of the page component's data object.
+ * @template TStore - The type of the MobX store.
+ * @template TCustom - The type of the page component's custom options object.
+ *
+ * @param options - The options object for the page component.
+ * @param options.store - The MobX store to connect to the page component.
+ * @param options.onLoad - The `onLoad` lifecycle method for the page component.
+ * @param options.onUnload - The `onUnload` lifecycle method for the page component.
+ *
+ * @returns The connected page component.
+ */
 export const connectPage = <
   TData extends WechatMiniprogram.Page.DataOption,
   TStore extends Record<string, any>,
