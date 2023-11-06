@@ -8,13 +8,10 @@
    <a href="https://developers.weixin.qq.com/s/GNZlomm87hM3">Example</a>
 </p>
 
-## Why is it recommended to use mobx-miniprogram-lite
-
-mobx-miniprogram-lite is a responsive view based on mobx that implements WeChat mini programs through the publish and subscribe model. Developers can write logic through pure JavaScript to trigger automatic updates of views when data changes. Based on this pattern, write more concise and clear code.
-
-This library is zero-intrusive, you don’t have to introduce any frameworks to your project, nor do you need to do any large-scale refactoring of your code. You can introduce it gradually in your project, even if it only affects one data field at a time.
-
-For advanced developers, it is recommended to use JS’s native class syntax to write data layer logic, combined with domain-driven programming, to easily write highly coupled and low cohesion code.
+- Based on [mobx](https://zh.mobx.js.org/README.html) to implement in-depth data monitoring and responsive update of views.
+- Support [computed](https://mobx.js.org/computeds.html) derived calculations.
+- Public status management.
+- Write the logic layer of the mini program based on native JS to obtain a better code organization structure.
 
 ## Install
 

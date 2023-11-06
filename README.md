@@ -8,13 +8,10 @@
   <a href="https://developers.weixin.qq.com/s/GNZlomm87hM3">Example</a>
 </p>
 
-## 为什么推荐使用 mobx-miniprogram-lite
-
-mobx-miniprogram-lite 基于 mobx 实现，支持用户独立于组件之外编写数据层，并通过发布订阅模式实现小程序视图的响应式更新。开发者可以通过纯 JavaScript 编写逻辑，当数据发生改变时，触发视图的自动更新。基于这种模式，编写出更加简明、清晰的代码。
-
-这个库是零侵入式的，你不必为项目引入任何框架，也无需对代码进行任何大规模重构。你可以在项目中逐渐引入它，即使每次只作用于一个数据字段。
-
-对于高级开发者，推荐使用 JS 原生的 class 语法来编写数据层逻辑，结合领域驱动编程，能够轻松编写出高耦合、低内聚的代码。
+- 基于 [mobx](https://zh.mobx.js.org/README.html) 实现数据的深度监听，响应式更新视图。
+- 支持 [computed](https://mobx.js.org/computeds.html) 派生计算。
+- 公共状态管理。
+- 基于原生 JS 编写小程序逻辑层，获得更好的代码组织结构。
 
 ## 安装
 
