@@ -1,6 +1,6 @@
 import { makeAutoObservable } from '@/index'
 
-class CountStore {
+export class CountStore {
   constructor() {
     makeAutoObservable(this)
   }

@@ -1,4 +1,7 @@
-import { Model, StoreListener, getStoreInstance } from '@/store-map'
+import { getStoreInstance } from '@/store-map'
+import viewManager from '@/view-manager'
+
+import type { Model } from '@/store-map'
 
 /**
  * Connects a MobX store to a WeChat MiniProgram component.
@@ -35,6 +38,7 @@ export const connectComponent = <
     TMethod,
     TCustomInstanceProperty & {
       store: TStore
+      __VIEW_ID__: string
     },
     TIsPage
   >
@@ -57,17 +61,24 @@ export const connectComponent = <
     })
   }
 
-  const listeners: StoreListener[] = []
+  const instanceMap = viewManager.createViewInstanceMap()
 
   // create listeners
   const replaceAttached = function (this: Instance) {
+    // uniq view id
+    const viewId = viewManager.createViewId()
+
+    const viewInstanceMeta = viewManager.createViewInstance(instanceMap, viewId)
+
+    this.__VIEW_ID__ = viewId
+
     let formatedData: Record<string, any> = {}
 
     Object.entries(store as {}).forEach(([name, model]: [string, any]) => {
       const listener = listenerFactory.bind(this, name + '.')
       const storeInst = getStoreInstance(model)
       storeInst.bindListener(listener)
-      listeners.push(listener)
+      viewInstanceMeta.listeners.push(listener)
       formatedData[name] = storeInst.latestData
     })
 
@@ -85,12 +96,18 @@ export const connectComponent = <
 
   // @override detached
   function detached(this: Instance) {
-    Object.entries(store as NonNullable<typeof store>).forEach(
-      ([name, model]) => {
-        const storeInst = getStoreInstance(model)
-        listeners.forEach((listener) => storeInst.unbindListener(listener))
-      }
-    )
+    const viewId = this.__VIEW_ID__
+    const listeners = instanceMap[viewId]?.listeners ?? []
+    if (listeners.length) {
+      Object.entries(store as NonNullable<typeof store>).forEach(
+        ([name, model]) => {
+          const storeInst = getStoreInstance(model)
+          listeners.forEach((listener) => storeInst.unbindListener(listener))
+        }
+      )
+    }
+    // viewId will never be reused
+    if (instanceMap[viewId]) delete instanceMap[viewId]
     _detached?.call(this)
   }
 

@@ -1,0 +1,1 @@
+<view>{{count.value}}</view>

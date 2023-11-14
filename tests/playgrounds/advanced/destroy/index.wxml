@@ -1,0 +1,4 @@
+<counter></counter>
+<counter wx:if="{{showMulti}}"></counter>
+<button bindtap="addValue">add</button>
+<button bindtap="toggleShowMulti">toggle</button>

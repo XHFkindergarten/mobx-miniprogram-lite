@@ -1,4 +1,7 @@
-import { Data, getStoreInstance, Model, StoreListener } from '@/store-map'
+import { getStoreInstance } from '@/store-map'
+import viewManager from '@/view-manager'
+
+import type { Data, Model } from '@/store-map'
 
 /**
  * Connects a WeChat Mini Program page component to a MobX store.
@@ -19,6 +22,7 @@ export const connectPage = <
   TStore extends Record<string, any>,
   TCustom extends WechatMiniprogram.Page.CustomOption & {
     store: TStore
+    __VIEW_ID__: string
   }
 >(
   options: WechatMiniprogram.Page.Options<TData, TCustom>
@@ -42,17 +46,25 @@ export const connectPage = <
     })
   }
 
-  const listeners: StoreListener[] = []
+  const instanceMap = viewManager.createViewInstanceMap()
 
   // create listeners
   const replaceOnLoad = function (this: Instance) {
+    // uniq view id
+    const viewId = viewManager.createViewId()
+
+    const viewInstanceMeta = viewManager.createViewInstance(instanceMap, viewId)
+
+    this.__VIEW_ID__ = viewId
+
     let formatedData: Model = {}
 
     Object.entries(store).forEach(([name, model]: [string, Data]) => {
       const listener = listenerFactory.bind(this, name + '.')
       const storeInst = getStoreInstance(model)
       storeInst.bindListener(listener)
-      listeners.push(listener)
+      viewInstanceMeta.listeners.push(listener)
+
       formatedData[name] = storeInst.latestData
     })
     // initial setData
@@ -70,12 +82,18 @@ export const connectPage = <
 
   // @override onUnload
   function onUnload(this: Instance, ...args: any[]) {
-    Object.entries(store as NonNullable<typeof store>).forEach(
-      ([name, model]) => {
-        const storeInst = getStoreInstance(model)
-        listeners.forEach((listener) => storeInst.unbindListener(listener))
-      }
-    )
+    const viewId = this.__VIEW_ID__
+    const listeners = instanceMap[viewId]?.listeners ?? []
+    if (listeners.length) {
+      Object.entries(store as NonNullable<typeof store>).forEach(
+        ([name, model]) => {
+          const storeInst = getStoreInstance(model)
+          listeners.forEach((listener) => storeInst.unbindListener(listener))
+        }
+      )
+    }
+    // viewId will never be reused
+    if (instanceMap[viewId]) delete instanceMap[viewId]
     _onUnload?.apply(this, args as [])
   }
 
