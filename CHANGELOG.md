@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.3...mobx-miniprogram-lite0.0.5) (2023-11-14)
+
+
+### Features
+
+* 🎸 add `configureLog` API ([464813b](https://github.com/XHFkindergarten/mobx-miniprogram-lite/commit/464813ba5ef3fab04ec6d469064aae866cad1493))
+
+
+### Bug Fixes
+
+* 🐛 handle memory-link ([a358b34](https://github.com/XHFkindergarten/mobx-miniprogram-lite/commit/a358b342314b7a712c2fe893f09f0093a3ff495f))
+
 ### [0.0.4](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.3...mobx-miniprogram-lite0.0.4) (2023-10-31)
 
 
