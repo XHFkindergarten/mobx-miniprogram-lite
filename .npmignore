@@ -8,3 +8,11 @@ yarn-error.log
 yarn.lock
 .vscode
 CHANGELOG.md
+.github
+.husky
+coverage
+example
+tests
+jest.config.ts
+README.md
+README_en_US.md
