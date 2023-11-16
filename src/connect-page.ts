@@ -22,12 +22,16 @@ export const connectPage = <
   TStore extends Record<string, any>,
   TCustom extends WechatMiniprogram.Page.CustomOption & {
     store: TStore
-    __VIEW_ID__: string
   }
 >(
   options: WechatMiniprogram.Page.Options<TData, TCustom>
 ) => {
-  type Instance = WechatMiniprogram.Page.Instance<TData, TCustom>
+  type Instance = WechatMiniprogram.Page.Instance<
+    TData,
+    TCustom & {
+      __VIEW_ID__: string
+    }
+  >
 
   const _onLoad = options.onLoad
   const _onUnload = options.onUnload
