@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.5...mobx-miniprogram-lite0.0.7) (2024-10-17)
+
+
+### Bug Fixes
+
+* 🐛 remove __VIEW_ID__ from ts type ([e45115a](https://github.com/XHFkindergarten/mobx-miniprogram-lite/commit/e45115a5e6aa272398874c46878ecdf9d41edfd4))
+* handle circular reference model ([5ea9b86](https://github.com/XHFkindergarten/mobx-miniprogram-lite/commit/5ea9b8637d2a25121c3aad0120be004750301e38))
+
 ### [0.0.6](https://github.com/XHFkindergarten/mobx-miniprogram-lite/compare/mobx-miniprogram-lite0.0.3...mobx-miniprogram-lite0.0.6) (2023-11-16)
 
 
