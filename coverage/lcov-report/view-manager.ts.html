@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.9% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>10/11</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>4/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>0/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -134,7 +134,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,21 +144,21 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">45x</span>
-<span class="cline-any cline-yes">45x</span>
-<span class="cline-any cline-yes">45x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">45x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">101x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -183,8 +183,8 @@ export interface InstanceMetaMap {
  * Creates an empty view instance map.
  * @returns An empty view instance map.
  */
-function createViewInstanceMap() {
-  return {} as InstanceMetaMap
+function <span class="fstat-no" title="function not covered" >createViewInstanceMap() {</span>
+<span class="cstat-no" title="statement not covered" >  return {} as InstanceMetaMap</span>
 }
 &nbsp;
 /**
@@ -193,19 +193,19 @@ function createViewInstanceMap() {
  * @param viewId - The ID of the new view instance.
  * @returns The newly created view instance.
  */
-function createViewInstance(map: InstanceMetaMap, viewId: string) {
-  const meta: InstanceMeta = { listeners: [] }
-  map[viewId] = meta
-  return meta
+function <span class="fstat-no" title="function not covered" >createViewInstance(m</span>ap: InstanceMetaMap, viewId: string) {
+  const meta: InstanceMeta = <span class="cstat-no" title="statement not covered" >{ listeners: [] }</span>
+<span class="cstat-no" title="statement not covered" >  map[viewId] = meta</span>
+<span class="cstat-no" title="statement not covered" >  return meta</span>
 }
 &nbsp;
 /**
  * A function that generates a unique view ID.
  * @returns A unique view ID.
  */
-export const <span class="cstat-no" title="statement not covered" >createViewId </span>= (() =&gt; {
-  let id = 0
-  return () =&gt; id++ + ''
+export const createViewId = <span class="cstat-no" title="statement not covered" >(<span class="fstat-no" title="function not covered" >() =&gt; {</span></span>
+  let id = <span class="cstat-no" title="statement not covered" >0</span>
+<span class="cstat-no" title="statement not covered" >  return <span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >i</span>d++ + ''</span></span>
 })()
 &nbsp;
 export default {
@@ -220,7 +220,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-14T12:40:54.044Z
+                at 2024-10-17T08:37:37.259Z
             </div>
         <script src="prettify.js"></script>
         <script>

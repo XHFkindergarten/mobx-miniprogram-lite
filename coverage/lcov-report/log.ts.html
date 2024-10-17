@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">36.84% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/19</span>
+                <span class='fraction'>0/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>1/5</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/4</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">31.25% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/16</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
@@ -150,7 +150,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -159,7 +159,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -200,7 +200,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -210,9 +210,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">66x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export interface ConfigureLogOptions {
@@ -226,7 +226,7 @@ class Logger {
   /**
    * A map of color names to their corresponding hex codes.
    */
-  static ColorMap = {
+  static ColorMap = <span class="cstat-no" title="statement not covered" >{</span>
     orange: '#d95220',
     blue: '#6cb6ff',
     green: '#67de7b'
@@ -235,7 +235,7 @@ class Logger {
   /**
    * A boolean indicating whether logging is enabled.
    */
-  loggable = false
+  loggable = <span class="cstat-no" title="statement not covered" >false</span>
 &nbsp;
   /**
    * Configures the logger.
@@ -267,7 +267,7 @@ class Logger {
    * @param param0 - The parameters for logging.
    * @returns A boolean indicating whether logging was successful.
    */
-  log({
+<span class="fstat-no" title="function not covered" >  log({</span>
     name,
     color = <span class="branch-0 cbranch-no" title="branch not covered" >'orange',</span>
     value
@@ -276,7 +276,7 @@ class Logger {
     color: keyof (typeof Logger)['ColorMap']
     value: any
   }) {
-    if (!this.loggable) return false
+<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.loggable) <span class="cstat-no" title="statement not covered" >return false</span></span>
 <span class="cstat-no" title="statement not covered" >    console.log(</span>
       `%c${name}`,
       `background-color:${Logger.ColorMap[color]};padding:2px;color:#FFF;`,
@@ -286,9 +286,9 @@ class Logger {
   }
 }
 &nbsp;
-export const logger = new Logger()
+export const logger = <span class="cstat-no" title="statement not covered" >new Logger()</span>
 &nbsp;
-export const <span class="cstat-no" title="statement not covered" >configureLog </span>= <span class="fstat-no" title="function not covered" >(.</span>..args: Parameters&lt;Logger['configureLog']&gt;) =&gt; {
+export const configureLog = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(.</span>..args: Parameters&lt;Logger['configureLog']&gt;) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  logger.configureLog.apply(logger, args)</span>
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -298,7 +298,7 @@ export const <span class="cstat-no" title="statement not covered" >configureLog 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-14T12:40:54.044Z
+                at 2024-10-17T08:37:37.259Z
             </div>
         <script src="prettify.js"></script>
         <script>

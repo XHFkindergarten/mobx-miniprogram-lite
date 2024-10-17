@@ -2,7 +2,7 @@ import { getType, isObject } from '@/utils'
 import { DATE_TYPE, FUN_TYPE, REG_TYPE } from '@/const'
 import { isObservableArray } from 'mobx'
 
-export function traverseModel<T>(model: T): T {
+export function traverseModel<T>(model: T, seen = new Set<unknown>()): T {
   // 0, '', undefined, null
   if (!model) return model
 
@@ -12,6 +12,10 @@ export function traverseModel<T>(model: T): T {
     typeof model === 'number'
   )
     return model
+
+  if (seen.has(model)) return model
+
+  seen.add(model)
 
   const type = getType(model)
 
@@ -23,7 +27,7 @@ export function traverseModel<T>(model: T): T {
   if (Array.isArray(model) || isObservableArray(model)) {
     const arr = [] as typeof model
     for (let i = 0; i < model.length; i++) {
-      arr.push(traverseModel(model[i]))
+      arr.push(traverseModel(model[i], seen))
     }
     return arr
   }
@@ -33,7 +37,7 @@ export function traverseModel<T>(model: T): T {
 
   // dfs serializable properties
   getSerializableKeys(model).forEach((key) => {
-    result[key] = traverseModel((model as Record<string, any>)[key])
+    result[key] = traverseModel((model as Record<string, any>)[key], seen)
   })
 
   return result
